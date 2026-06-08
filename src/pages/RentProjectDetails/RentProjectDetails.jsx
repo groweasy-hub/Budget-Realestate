@@ -82,7 +82,6 @@ import {
   RentPriceUnit,
   RentSpecCard,
   RentSpecGrid,
-  RentSpecLabel,
   RentSpecValue,
   RentSummaryCard,
   SummaryItem,
@@ -611,20 +610,6 @@ function GalleryIcon() {
         d="M10 9.1L8.6 10.8L10.7 13L13.8 9.8L16.5 12.5"
         stroke="currentColor"
         strokeWidth="1.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function CheckMarkIcon() {
-  return (
-    <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M5.1 9.3L7.6 11.8L12.9 6.5"
-        stroke="currentColor"
-        strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
