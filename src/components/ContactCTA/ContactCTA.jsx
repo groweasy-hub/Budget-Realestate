@@ -1,9 +1,12 @@
 import {
   ActionRow,
+  BackdropSkyline,
   ButtonIcon,
   ButtonLink,
+  Birds,
   Copy,
   OuterSection,
+  FloatingCards,
   FloatingCard,
   FloatingCardEyebrow,
   FloatingCardIcon,
@@ -68,41 +71,49 @@ function ContactCTA({
           </KickerPill>
           <Title>{title}</Title>
           <Description>{description}</Description>
-
-          <ActionRow>
-            <ButtonLink to={primaryTo}>
-              <span>{primaryLabel}</span>
-              <ButtonIcon>
-                <ArrowIcon />
-              </ButtonIcon>
-            </ButtonLink>
-            <ButtonLink to={secondaryTo} $ghost>
-              <span>{secondaryLabel}</span>
-              <ButtonIcon $ghost>
-                <PhoneIcon />
-              </ButtonIcon>
-            </ButtonLink>
-          </ActionRow>
         </Copy>
 
         <HeroPanel>
+          <BackdropSkyline aria-hidden="true">
+            <SkylineIcon />
+          </BackdropSkyline>
+          <Birds aria-hidden="true">
+            <BirdsIcon />
+          </Birds>
           <HeroArt>
             <HeroImage src={heroImage} alt={heroImageAlt} />
           </HeroArt>
 
-          {cards.map((card) => (
-            <FloatingCard key={card.id || card.value} $position={card.position}>
-              <FloatingCardIcon>
-                <StatIcon type={card.icon} />
-              </FloatingCardIcon>
-              <div>
-                <FloatingCardEyebrow>{card.eyebrow}</FloatingCardEyebrow>
-                <FloatingCardValue>{card.value}</FloatingCardValue>
-                <p>{card.description}</p>
-              </div>
-            </FloatingCard>
-          ))}
+          <FloatingCards>
+            {cards.map((card) => (
+              <FloatingCard key={card.id || card.value} $position={card.position}>
+                <FloatingCardIcon>
+                  <StatIcon type={card.icon} />
+                </FloatingCardIcon>
+                <div>
+                  <FloatingCardEyebrow>{card.eyebrow}</FloatingCardEyebrow>
+                  <FloatingCardValue>{card.value}</FloatingCardValue>
+                  <p>{card.description}</p>
+                </div>
+              </FloatingCard>
+            ))}
+          </FloatingCards>
         </HeroPanel>
+
+        <ActionRow>
+          <ButtonLink to={primaryTo}>
+            <span>{primaryLabel}</span>
+            <ButtonIcon>
+              <ArrowIcon />
+            </ButtonIcon>
+          </ButtonLink>
+          <ButtonLink to={secondaryTo} $ghost>
+            <span>{secondaryLabel}</span>
+            <ButtonIcon $ghost>
+              <PhoneIcon />
+            </ButtonIcon>
+          </ButtonLink>
+        </ActionRow>
       </SectionShell>
     </OuterSection>
   );
@@ -243,6 +254,101 @@ function ChartIcon() {
         strokeLinejoin="round"
       />
     </svg>
+  );
+}
+
+function BirdsIcon() {
+  return (
+    <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M8 23C14.9 15.5 21.9 15.8 29 23C35.6 29.2 42.1 29.3 48 23"
+        stroke="currentColor"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M56 39C61.8 32.5 67.6 32.7 73.4 39C78.8 44.4 84.1 44.6 89 39"
+        stroke="currentColor"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function SkylineIcon() {
+  return (
+    <svg viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g opacity="0.88">
+        <Tower x="18" y="228" width="40" height="156" />
+        <Tower x="82" y="170" width="54" height="214" />
+        <Tower x="156" y="70" width="74" height="314" />
+        <Tower x="252" y="134" width="58" height="250" />
+      </g>
+    </svg>
+  );
+}
+
+function Tower({ x, y, width, height }) {
+  const domeY = y + height * 0.16;
+  const baseY = y + height;
+  const middleX = x + width / 2;
+  const bodyWidth = width * 0.44;
+  const bodyLeft = middleX - bodyWidth / 2;
+  const topWidth = width * 0.2;
+  const topLeft = middleX - topWidth / 2;
+
+  return (
+    <g transform={`translate(${x} ${y})`}>
+      <path
+        d={`
+          M ${width * 0.5} 0
+          L ${width * 0.62} ${height * 0.16}
+          H ${width * 0.56}
+          V ${height * 0.22}
+          C ${width * 0.78} ${height * 0.29}, ${width * 0.78} ${height * 0.39}, ${width * 0.62} ${height * 0.46}
+          V ${height * 0.78}
+          C ${width * 0.76} ${height * 0.82}, ${width * 0.86} ${height * 0.9}, ${width * 0.88} ${height}
+          H ${width * 0.12}
+          C ${width * 0.14} ${height * 0.9}, ${width * 0.24} ${height * 0.82}, ${width * 0.38} ${height * 0.78}
+          V ${height * 0.46}
+          C ${width * 0.22} ${height * 0.39}, ${width * 0.22} ${height * 0.29}, ${width * 0.44} ${height * 0.22}
+          V ${height * 0.16}
+          H ${width * 0.38}
+          L ${width * 0.5} 0
+          Z
+        `}
+        fill="currentColor"
+        fillOpacity="0.18"
+      />
+      <rect
+        x={bodyLeft - x}
+        y={height * 0.18}
+        width={bodyWidth}
+        height={height * 0.6}
+        rx={bodyWidth * 0.18}
+        fill="currentColor"
+        fillOpacity="0.16"
+      />
+      <rect
+        x={topLeft - x}
+        y={height * 0.08}
+        width={topWidth}
+        height={height * 0.12}
+        rx={topWidth * 0.35}
+        fill="currentColor"
+        fillOpacity="0.18"
+      />
+      <path
+        d={`M ${middleX - x} ${domeY} V ${baseY - y}`}
+        stroke="currentColor"
+        strokeOpacity="0.16"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+    </g>
   );
 }
 

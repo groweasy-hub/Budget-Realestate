@@ -12,6 +12,10 @@ import {
 } from "../../utils/propertySearch";
 import { NavWrap } from "../Home/HomeStyles";
 import {
+  BreadcrumbChevron,
+  BreadcrumbCurrent,
+  BreadcrumbLink,
+  Breadcrumbs,
   BuilderCard,
   BuilderGrid,
   BuilderName,
@@ -19,8 +23,14 @@ import {
   BuyPageShell,
   CenterAccent,
   CenterTitle,
+  FavoriteButton,
+  FeaturedProjectsRow,
   FilterField,
+  FilterControl,
+  FilterControlIcon,
+  FilterChevron,
   FilterGrid,
+  FilterHeading,
   FilterInput,
   FilterLabel,
   FilterPanel,
@@ -30,9 +40,15 @@ import {
   HeroGrid,
   HeroImage,
   HeroImageWrap,
+  HeroKicker,
+  HeroKickerLine,
+  HeroKickerRow,
   HeroSection,
   HeroTitle,
   HeroVisual,
+  MobileStatItem,
+  MobileStatsStrip,
+  MoreFiltersButton,
   PageInner,
   PageSection,
   ReasonCard,
@@ -53,6 +69,7 @@ import {
   SupportBand,
   SupportButton,
   SupportCopy,
+  SupportIllustration,
   TrustIcon,
   TrustItem,
   TrustLabel,
@@ -64,6 +81,8 @@ function Buy() {
   const [searchParams] = useSearchParams();
   const { hero, featuredProjects, reasons, builders, supportCta, trustStrip } =
     buyPageContent;
+  const mainSearchField = hero.filters[0];
+  const filterOptions = hero.filters.slice(1);
   const locationFilter = searchParams.get("location") || "";
   const propertyTypeFilter = searchParams.get("propertyType") || "";
   const minBudgetFilter = searchParams.get("minBudget") || "";
@@ -75,7 +94,10 @@ function Buy() {
         const { min, max } = parsePriceRangeText(project.price);
 
         return (
-          matchesLocation(`${project.title} ${project.location}`, locationFilter) &&
+          matchesLocation(
+            `${project.title} ${project.location}`,
+            locationFilter,
+          ) &&
           matchesPropertyType(projectType, propertyTypeFilter) &&
           matchesBudgetRange(min, max, minBudgetFilter, maxBudgetFilter)
         );
@@ -96,6 +118,17 @@ function Buy() {
       </NavWrap>
       <PageInner>
         <HeroSection>
+          <Breadcrumbs aria-label="Breadcrumb">
+            <BreadcrumbLink to="/">Home</BreadcrumbLink>
+            <BreadcrumbChevron aria-hidden="true" />
+            <BreadcrumbCurrent>Buy</BreadcrumbCurrent>
+          </Breadcrumbs>
+
+          <HeroKickerRow>
+            <HeroKicker>{hero.kicker}</HeroKicker>
+            <HeroKickerLine />
+          </HeroKickerRow>
+
           <HeroGrid>
             <HeroCopy>
               <HeroTitle>{hero.title}</HeroTitle>
@@ -123,26 +156,76 @@ function Buy() {
             </HeroVisual>
           </HeroGrid>
 
+          <MobileStatsStrip>
+            {hero.stats.map((stat) => (
+              <MobileStatItem key={stat.label}>
+                <StatIcon>
+                  <MetricIcon type={stat.icon} />
+                </StatIcon>
+                <div>
+                  <StatValue>{stat.value}</StatValue>
+                  <StatLabel>{stat.label}</StatLabel>
+                </div>
+              </MobileStatItem>
+            ))}
+          </MobileStatsStrip>
+
           <FilterPanel>
+            <FilterHeading>Search Projects</FilterHeading>
             <FilterGrid>
-              {hero.filters.map((field) => (
+              <FilterField $full>
+                <FilterLabel $visuallyHiddenOnMobile>
+                  {mainSearchField.label}
+                </FilterLabel>
+                <FilterControl>
+                  <FilterControlIcon>
+                    <SearchFieldIcon />
+                  </FilterControlIcon>
+                  <FilterInput placeholder={mainSearchField.placeholder} />
+                </FilterControl>
+              </FilterField>
+
+              {filterOptions.map((field) => (
                 <FilterField key={field.label}>
                   <FilterLabel>{field.label}</FilterLabel>
-                  {field.type === "select" ? (
-                    <FilterSelect defaultValue="">
-                      <option value="" disabled>
-                        {field.placeholder}
-                      </option>
-                      <option>{field.placeholder}</option>
-                    </FilterSelect>
-                  ) : (
-                    <FilterInput placeholder={field.placeholder} />
-                  )}
+                  <FilterControl>
+                    <FilterControlIcon>
+                      <FieldIcon label={field.label} />
+                    </FilterControlIcon>
+                    {field.type === "select" ? (
+                      <>
+                        <FilterSelect defaultValue="">
+                          <option value="" disabled>
+                            {field.placeholder}
+                          </option>
+                          <option>{field.placeholder}</option>
+                        </FilterSelect>
+                        <FilterChevron>
+                          <ChevronDownIcon />
+                        </FilterChevron>
+                      </>
+                    ) : (
+                      <>
+                        <FilterInput placeholder={field.placeholder} />
+                        <FilterChevron>
+                          <ChevronDownIcon />
+                        </FilterChevron>
+                      </>
+                    )}
+                  </FilterControl>
                 </FilterField>
               ))}
 
-              <SearchButton type="button">{hero.searchLabel}</SearchButton>
+              <SearchButton type="button">
+                <SearchFieldIcon />
+                <span>{hero.searchLabel}</span>
+              </SearchButton>
             </FilterGrid>
+
+            <MoreFiltersButton type="button">
+              <TuneIcon />
+              <span>{hero.moreFiltersLabel}</span>
+            </MoreFiltersButton>
           </FilterPanel>
         </HeroSection>
 
@@ -155,7 +238,7 @@ function Buy() {
             </SectionAction>
           </SectionHeaderRow>
 
-          <FP.CardsRow>
+          <FeaturedProjectsRow>
             {filteredProjects.length > 0 ? (
               filteredProjects.map((property, index) => (
                 <BuyProjectCard
@@ -169,7 +252,7 @@ function Buy() {
                 No projects match the selected home search filters.
               </div>
             )}
-          </FP.CardsRow>
+          </FeaturedProjectsRow>
         </PageSection>
 
         <PageSection>
@@ -219,12 +302,18 @@ function Buy() {
 
             <SupportActions>
               <SupportButton type="button">
+                <SupportUserIcon />
                 {supportCta.primaryLabel}
               </SupportButton>
               <SupportButton type="button" $ghost>
+                <CalendarIcon />
                 {supportCta.secondaryLabel}
               </SupportButton>
             </SupportActions>
+
+            <SupportIllustration aria-hidden="true">
+              <SupportLineArt />
+            </SupportIllustration>
           </SupportBand>
 
           <TrustRow>
@@ -246,7 +335,10 @@ function Buy() {
 function getBuyProjectType(project) {
   const projectSummary = `${project.category} ${project.title}`.toLowerCase();
 
-  if (projectSummary.includes("office") || projectSummary.includes("commercial")) {
+  if (
+    projectSummary.includes("office") ||
+    projectSummary.includes("commercial")
+  ) {
     return "Commercial";
   }
 
@@ -269,6 +361,7 @@ function BuyProjectCard({ property, index }) {
   const navigate = useNavigate();
   const surface = index % 2 === 0 ? "light" : "dark";
   const [hasImageError, setHasImageError] = useState(false);
+  const amenitiesValue = getAmenitiesValue(property.reviews, property.rating);
 
   const handleCardOpen = () => {
     navigate(`/buy-project/${property.id}`);
@@ -293,16 +386,21 @@ function BuyProjectCard({ property, index }) {
       onClick={handleCardOpen}
       onKeyDown={handleCardKeyDown}
     >
-      <FP.CardSurface $surface={surface}>
+      <FP.CardSurface $surface={surface} $buyCard>
         <FP.FigureShell
           $layout="card"
           $tone={property.tone || property.accent}
           $surface={surface}
+          $buyCard
         >
           <FP.FigureBadge $surface={surface}>
             <BadgeIcon kind={property.badgeIcon} />
             <FP.FigureBadgeText>{property.badge}</FP.FigureBadgeText>
           </FP.FigureBadge>
+
+          <FavoriteButton type="button" tabIndex={-1} aria-label="Save project">
+            <HeartIcon />
+          </FavoriteButton>
 
           {property.image && !hasImageError ? (
             <FP.FigureImage
@@ -315,36 +413,42 @@ function BuyProjectCard({ property, index }) {
           )}
         </FP.FigureShell>
 
-        <FP.CardBody $surface={surface}>
-          <FP.CardTop>
+        <FP.CardBody $surface={surface} $buyCard>
+          <FP.CardTop $buyCard>
             <div>
-              <FP.CardLabel $surface={surface}>
+              <FP.CardLabel $surface={surface} $buyCard>
                 {property.category}
               </FP.CardLabel>
-              <FP.TitleText $surface={surface}>{property.title}</FP.TitleText>
+              <FP.TitleText $surface={surface} $buyCard>
+                {property.title}
+              </FP.TitleText>
+              <FP.LocationRow $buyCard>
+                <FP.LocationIcon $surface={surface}>
+                  <PinIcon />
+                </FP.LocationIcon>
+                <FP.LocationText $surface={surface} $buyCard>
+                  {property.location}
+                </FP.LocationText>
+              </FP.LocationRow>
             </div>
 
-            <FP.PriceCard $surface={surface}>
-              <FP.PriceText $surface={surface}>{property.price}</FP.PriceText>
-              <FP.CardStatus $surface={surface}>
+            <FP.PriceCard $surface={surface} $buyCard>
+              <FP.PriceText $surface={surface} $buyCard>
+                {formatPriceDisplay(property.price)}
+              </FP.PriceText>
+              <FP.CardStatus $surface={surface} $buyCard>
                 {property.availability}
               </FP.CardStatus>
             </FP.PriceCard>
           </FP.CardTop>
 
-          <FP.LocationRow>
-            <FP.LocationIcon $surface={surface}>
-              <PinIcon />
-            </FP.LocationIcon>
-            <FP.LocationText $surface={surface}>
-              {property.location}
-            </FP.LocationText>
-          </FP.LocationRow>
-
-          <FP.CardMeta $surface={surface}>
+          <FP.CardMeta $surface={surface} $buyCard>
             <FP.CardMetaItem $surface={surface}>
               <LandAreaIcon />
               <div>
+                <FP.CardMetaLabel $surface={surface}>
+                  Land Area
+                </FP.CardMetaLabel>
                 <FP.CardMetaValue $surface={surface}>
                   {property.area}
                 </FP.CardMetaValue>
@@ -353,6 +457,9 @@ function BuyProjectCard({ property, index }) {
             <FP.CardMetaItem $surface={surface}>
               <TowerIcon />
               <div>
+                <FP.CardMetaLabel $surface={surface}>
+                  Total Units
+                </FP.CardMetaLabel>
                 <FP.CardMetaValue $surface={surface}>
                   {property.details}
                 </FP.CardMetaValue>
@@ -361,14 +468,17 @@ function BuyProjectCard({ property, index }) {
             <FP.CardMetaItem $surface={surface}>
               <AmenitiesIcon />
               <div>
+                <FP.CardMetaLabel $surface={surface}>
+                  Amenities
+                </FP.CardMetaLabel>
                 <FP.CardMetaValue $surface={surface}>
-                  {property.rating} Star
+                  {amenitiesValue}
                 </FP.CardMetaValue>
               </div>
             </FP.CardMetaItem>
           </FP.CardMeta>
 
-          <FP.PriceWrap>
+          <FP.PriceWrap $buyCard>
             <FP.ReviewsPill $surface={surface}>
               <StarIcon />
               <span>{property.rating}</span>
@@ -387,6 +497,20 @@ function BuyProjectCard({ property, index }) {
   );
 }
 
+function getAmenitiesValue(reviews = "", rating = "0") {
+  const reviewCount = Number.parseInt(String(reviews).replace(/\D/g, ""), 10);
+
+  if (Number.isFinite(reviewCount) && reviewCount > 0) {
+    return `${Math.max(20, Math.round(reviewCount / 10) * 10)}+`;
+  }
+
+  return `${Math.max(20, Math.round(Number(rating || 0) * 20))}+`;
+}
+
+function formatPriceDisplay(price = "") {
+  return String(price).replace(/\bRs\b/g, "₹");
+}
+
 function MetricIcon({ type }) {
   switch (type) {
     case "builders":
@@ -396,6 +520,24 @@ function MetricIcon({ type }) {
     default:
       return <ProjectsMetricIcon />;
   }
+}
+
+function FieldIcon({ label = "" }) {
+  const normalizedLabel = label.toLowerCase();
+
+  if (normalizedLabel.includes("location")) {
+    return <LocationMetricIcon />;
+  }
+
+  if (normalizedLabel.includes("type")) {
+    return <ProjectsMetricIcon />;
+  }
+
+  if (normalizedLabel.includes("budget")) {
+    return <RupeeIcon />;
+  }
+
+  return <StatusIcon />;
 }
 
 function ReasonSvg({ type }) {
@@ -598,6 +740,195 @@ function ArrowIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+    </svg>
+  );
+}
+
+function ChevronDownIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M5.5 7.8L10 12.3L14.5 7.8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function SearchFieldIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="9" cy="9" r="5.7" stroke="currentColor" strokeWidth="1.7" />
+      <path
+        d="M13.2 13.2L16.2 16.2"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function RupeeIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M5.5 4.5H13.5"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+      <path
+        d="M5.5 8.2H13"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+      <path
+        d="M8 8.2C10 8.2 11.5 7 11.5 5.5V4.5"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+      <path
+        d="M7 8.2L13 15.5"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function StatusIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect
+        x="4"
+        y="5"
+        width="12"
+        height="10"
+        rx="2"
+        stroke="currentColor"
+        strokeWidth="1.7"
+      />
+      <path
+        d="M7 9.5H13"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function TuneIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M4 6H16"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+      <path
+        d="M4 14H16"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+      <circle cx="7" cy="6" r="1.7" fill="currentColor" />
+      <circle cx="13" cy="14" r="1.7" fill="currentColor" />
+    </svg>
+  );
+}
+
+function HeartIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M10 15.6L4.7 10.4C3.6 9.3 3.6 7.4 4.7 6.3C5.8 5.2 7.6 5.2 8.7 6.3L10 7.6L11.3 6.3C12.4 5.2 14.2 5.2 15.3 6.3C16.4 7.4 16.4 9.3 15.3 10.4L10 15.6Z"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function SupportUserIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="8" cy="8" r="2.7" stroke="currentColor" strokeWidth="1.6" />
+      <path
+        d="M3.8 15.2C3.8 12.9 5.7 11.2 8 11.2C10.3 11.2 12.2 12.9 12.2 15.2"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <path
+        d="M14 7.2H17.2"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <path
+        d="M15.6 5.6V8.8"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function CalendarIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect
+        x="3.8"
+        y="5.2"
+        width="12.4"
+        height="11"
+        rx="2"
+        stroke="currentColor"
+        strokeWidth="1.6"
+      />
+      <path
+        d="M6.6 3.8V6.2"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <path
+        d="M13.4 3.8V6.2"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <path d="M3.8 8.2H16.2" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  );
+}
+
+function SupportLineArt() {
+  return (
+    <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M16 42H128L142 30V42H150"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M52 128V82H78V128" stroke="currentColor" strokeWidth="2" />
+      <path d="M86 128V66H112V128" stroke="currentColor" strokeWidth="2" />
+      <path d="M40 128H122" stroke="currentColor" strokeWidth="2" />
+      <path d="M20 56H50" stroke="currentColor" strokeWidth="2" />
+      <circle cx="24" cy="128" r="4" stroke="currentColor" strokeWidth="2" />
     </svg>
   );
 }

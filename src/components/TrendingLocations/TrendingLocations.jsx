@@ -13,6 +13,9 @@ import {
   ControlDots,
   Description,
   Header,
+  Kicker,
+  KickerLine,
+  KickerRow,
   ImageOverlay,
   Inner,
   LabelAccent,
@@ -24,7 +27,6 @@ import {
   ProgressBar,
   ProgressFill,
   Section,
-  SectionKicker,
   SectionTitle,
   Title,
 } from "./TrendingLocationsStyles";
@@ -37,6 +39,8 @@ function TrendingLocations({
   const [startIndex, setStartIndex] = useState(locations.length || 0);
   const [visibleCount, setVisibleCount] = useState(getVisibleCount());
   const [isAnimating, setIsAnimating] = useState(true);
+  const [isAutoScrollPaused, setIsAutoScrollPaused] = useState(false);
+  const isMobileAutoScroll = visibleCount === 1;
 
   useEffect(() => {
     function handleResize() {
@@ -59,6 +63,18 @@ function TrendingLocations({
 
     return () => window.cancelAnimationFrame(frame);
   }, [locations.length, visibleCount]);
+
+  useEffect(() => {
+    if (!isMobileAutoScroll || locations.length <= 1 || isAutoScrollPaused) {
+      return undefined;
+    }
+
+    const autoScroll = window.setInterval(() => {
+      setStartIndex((current) => current + 1);
+    }, 2400);
+
+    return () => window.clearInterval(autoScroll);
+  }, [isAutoScrollPaused, isMobileAutoScroll, locations.length]);
 
   const safeVisibleCount = Math.max(
     1,
@@ -85,16 +101,42 @@ function TrendingLocations({
     setStartIndex((current) => current + 1);
   }
 
+  function pauseAutoScroll() {
+    if (isMobileAutoScroll) {
+      setIsAutoScrollPaused(true);
+    }
+  }
+
+  function resumeAutoScroll() {
+    if (isMobileAutoScroll) {
+      setIsAutoScrollPaused(false);
+    }
+  }
+
   return (
     <Section id="trending-locations">
       <Inner>
         <Header>
-          <SectionKicker>Trending Locations</SectionKicker>
+          <KickerRow>
+            <KickerLine />
+            <Kicker>Trending Locations</Kicker>
+            <KickerLine />
+          </KickerRow>
+
           <SectionTitle>{title}</SectionTitle>
           <Description>{description}</Description>
         </Header>
 
-        <CarouselViewport>
+        <CarouselViewport
+          onMouseEnter={pauseAutoScroll}
+          onMouseLeave={resumeAutoScroll}
+          onTouchStart={pauseAutoScroll}
+          onTouchEnd={resumeAutoScroll}
+          onTouchCancel={resumeAutoScroll}
+          onPointerDown={pauseAutoScroll}
+          onPointerUp={resumeAutoScroll}
+          onPointerCancel={resumeAutoScroll}
+        >
           <CarouselTrack
             style={{
               "--visible-count": safeVisibleCount,

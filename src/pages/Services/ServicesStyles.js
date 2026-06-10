@@ -26,6 +26,10 @@ export const ServicesPageShell = styled.main`
       transparent 28%
     ),
     linear-gradient(180deg, #fdfefc 0%, #f4f8f2 100%);
+
+  @media (max-width: 760px) {
+    background: linear-gradient(180deg, #fbfcfb 0%, #ffffff 46%, #f8fbf8 100%);
+  }
 `;
 
 export const ServicesInner = styled.div`
@@ -37,11 +41,22 @@ export const ServicesInner = styled.div`
     width: min(100%, calc(100% - 24px));
     padding-bottom: 24px;
   }
+
+  @media (max-width: 640px) {
+    width: min(100%, calc(100% - 16px));
+    padding-top: 0;
+  }
 `;
 
 export const HeroSection = styled.section`
   position: relative;
   padding-top: 12px;
+
+  @media (max-width: 760px) {
+    margin: 0 -8px;
+    padding-top: 0;
+    overflow: visible;
+  }
 `;
 
 export const HeroGrid = styled.div`
@@ -53,10 +68,32 @@ export const HeroGrid = styled.div`
   @media (max-width: 1180px) {
     grid-template-columns: 1fr;
   }
+
+  @media (max-width: 760px) {
+    min-height: 146px;
+    grid-template-columns: minmax(170px, 0.72fr) minmax(170px, 1fr);
+    gap: 0;
+    align-items: end;
+    overflow: hidden;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.99) 0%,
+        rgba(255, 255, 255, 0.92) 36%,
+        rgba(255, 255, 255, 0.5) 58%,
+        rgba(255, 255, 255, 0) 82%
+      ),
+      linear-gradient(180deg, #f6fbff 0%, #ffffff 100%);
+  }
 `;
 
 export const HeroCopy = styled.div`
   padding: 22px 0 10px 30px;
+
+  @media (max-width: 760px) {
+    position: static;
+    padding: 29px 0 30px 25px;
+  }
 `;
 
 export const HeroBadge = styled.div`
@@ -85,6 +122,15 @@ export const HeroTitle = styled.h1`
   font-weight: 700;
   line-height: 1.04;
   letter-spacing: -0.04em;
+
+  @media (max-width: 760px) {
+    margin-top: 0;
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: 1.93rem;
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
 `;
 
 export const HeroAccent = styled.span`
@@ -98,6 +144,14 @@ export const HeroDescription = styled.p`
   color: #283630;
   font-size: 1.18rem;
   line-height: 1.6;
+
+  @media (max-width: 760px) {
+    max-width: 145px;
+    margin-top: 14px;
+    color: #142028;
+    font-size: 0.68rem;
+    line-height: 1.7;
+  }
 `;
 
 export const HeroHighlights = styled.div`
@@ -107,7 +161,15 @@ export const HeroHighlights = styled.div`
   margin-top: 28px;
 
   @media (max-width: 760px) {
-    gap: 18px;
+    position: absolute;
+    left: 17px;
+    right: 17px;
+    bottom: -52px;
+    z-index: 8;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+    margin-top: 0;
   }
 `;
 
@@ -117,6 +179,22 @@ export const HighlightItem = styled.div`
   gap: 12px;
   align-items: center;
   min-width: 218px;
+
+  @media (max-width: 760px) {
+    min-width: 0;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(27, 92, 51, 0.08);
+    box-shadow: 0 12px 28px rgba(34, 51, 40, 0.1);
+  }
+
+  @media (max-width: 640px) {
+    min-width: 0;
+    width: auto;
+  }
 `;
 
 export const HighlightIcon = styled.div`
@@ -133,6 +211,16 @@ export const HighlightIcon = styled.div`
     width: 24px;
     height: 24px;
   }
+
+  @media (max-width: 760px) {
+    width: 34px;
+    height: 34px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
 `;
 
 export const HighlightTitle = styled.div`
@@ -140,6 +228,10 @@ export const HighlightTitle = styled.div`
   font-size: 0.78rem;
   font-weight: 800;
   line-height: 1.25;
+
+  @media (max-width: 760px) {
+    font-size: 0.58rem;
+  }
 `;
 
 export const HighlightText = styled.div`
@@ -147,6 +239,13 @@ export const HighlightText = styled.div`
   color: ${muted};
   font-size: 0.82rem;
   line-height: 1.45;
+
+  @media (max-width: 760px) {
+    margin-top: 4px;
+    color: #0f1519;
+    font-size: 0.54rem;
+    line-height: 1.25;
+  }
 `;
 
 export const HeroVisual = styled.div`
@@ -158,6 +257,17 @@ export const HeroVisual = styled.div`
 
   @media (max-width: 1180px) {
     min-height: 340px;
+  }
+
+  @media (max-width: 640px) {
+    min-height: 260px;
+  }
+
+  @media (max-width: 760px) {
+    min-height: 146px;
+    margin-left: -52px;
+    align-items: stretch;
+    justify-content: stretch;
   }
 `;
 
@@ -174,6 +284,10 @@ export const HeroGlow = styled.div`
     rgba(210, 239, 209, 0.28) 46%,
     rgba(210, 239, 209, 0) 74%
   );
+
+  @media (max-width: 760px) {
+    display: none;
+  }
 `;
 
 export const HeroImage = styled.img`
@@ -192,6 +306,16 @@ export const HeroImage = styled.img`
     rgba(0, 0, 0, 1) 80%,
     rgba(0, 0, 0, 0) 100%
   );
+
+  @media (max-width: 760px) {
+    width: 100%;
+    height: 146px;
+    max-width: none;
+    object-fit: cover;
+    object-position: center 43%;
+    filter: none;
+    mask-image: none;
+  }
 `;
 
 export const ShieldOrb = styled.div`
@@ -213,9 +337,15 @@ export const ShieldOrb = styled.div`
   justify-content: center;
 
   @media (max-width: 760px) {
-    right: 8px;
-    width: 138px;
-    height: 138px;
+    right: 12px;
+    top: 24px;
+    width: 72px;
+    height: 72px;
+
+    svg {
+      width: 72px;
+      height: 84px;
+    }
   }
 `;
 
@@ -231,8 +361,16 @@ export const ShieldCard = styled.div`
   gap: 4px;
 
   @media (max-width: 760px) {
-    right: 0;
-    bottom: 64px;
+    right: 8px;
+    bottom: 18px;
+    min-width: 68px;
+    padding: 8px 10px;
+    border-radius: 9px;
+  }
+
+  @media (max-width: 560px) {
+    min-width: 68px;
+    padding: 8px 10px;
   }
 `;
 
@@ -240,17 +378,33 @@ export const ShieldCardTitle = styled.div`
   color: ${green};
   font-size: 1rem;
   font-weight: 800;
+
+  @media (max-width: 760px) {
+    font-size: 0.64rem;
+    text-align: center;
+  }
 `;
 
 export const ShieldCardText = styled.div`
   color: #4d5b55;
   font-size: 0.92rem;
+
+  @media (max-width: 760px) {
+    font-size: 0.52rem;
+    text-align: center;
+  }
 `;
 
 export const JourneySection = styled.section`
   ${panel};
   margin-top: 6px;
   padding: 18px 22px 20px;
+
+  @media (max-width: 760px) {
+    margin-top: 62px;
+    padding: 11px 12px 16px;
+    border-radius: 12px;
+  }
 `;
 
 export const JourneyTitle = styled.h2`
@@ -258,6 +412,11 @@ export const JourneyTitle = styled.h2`
   color: ${ink};
   font-size: 1.2rem;
   font-weight: 800;
+
+  @media (max-width: 760px) {
+    margin-bottom: 11px;
+    font-size: 0.78rem;
+  }
 `;
 
 export const JourneyRow = styled.div`
@@ -268,6 +427,11 @@ export const JourneyRow = styled.div`
   @media (max-width: 1100px) {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  @media (max-width: 760px) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0;
   }
 `;
 
@@ -307,6 +471,31 @@ export const JourneyStep = styled.div`
       display: none;
     }
   }
+
+  @media (max-width: 760px) {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 7px;
+    padding: 0 5px;
+    text-align: center;
+
+    &:not(:last-child)::after {
+      display: block;
+      left: calc(50% + 22px);
+      top: 23px;
+      width: calc(100% - 44px);
+      border-top: 1px dashed rgba(21, 98, 49, 0.62);
+    }
+
+    &:not(:last-child)::before {
+      display: block;
+      left: calc(100% - 8px);
+      top: 20px;
+      width: 4px;
+      height: 4px;
+    }
+  }
 `;
 
 export const JourneyIcon = styled.div`
@@ -323,12 +512,26 @@ export const JourneyIcon = styled.div`
     width: 36px;
     height: 36px;
   }
+
+  @media (max-width: 760px) {
+    width: 42px;
+    height: 42px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
 `;
 
 export const JourneyNumber = styled.div`
   color: ${green};
   font-size: 1.12rem;
   font-weight: 800;
+
+  @media (max-width: 760px) {
+    font-size: 0.62rem;
+  }
 `;
 
 export const JourneyStepTitle = styled.div`
@@ -337,6 +540,11 @@ export const JourneyStepTitle = styled.div`
   font-size: 1rem;
   font-weight: 800;
   line-height: 1.3;
+
+  @media (max-width: 760px) {
+    margin-top: 4px;
+    font-size: 0.56rem;
+  }
 `;
 
 export const JourneyText = styled.p`
@@ -344,6 +552,13 @@ export const JourneyText = styled.p`
   color: ${muted};
   font-size: 0.9rem;
   line-height: 1.58;
+
+  @media (max-width: 760px) {
+    margin-top: 11px;
+    color: #16222b;
+    font-size: 0.46rem;
+    line-height: 1.62;
+  }
 `;
 
 export const FeatureSection = styled.section`
@@ -360,12 +575,30 @@ export const FeatureSection = styled.section`
   @media (max-width: 1180px) {
     grid-template-columns: 1fr;
   }
+
+  @media (max-width: 760px) {
+    grid-template-columns: 26% minmax(0, 1fr);
+    gap: 0;
+    margin-top: 7px;
+    ${panel};
+    overflow: hidden;
+    border-radius: 10px;
+    scroll-margin-top: 72px;
+  }
 `;
 
 export const ImageCard = styled.div`
   ${panel};
   overflow: hidden;
   min-height: 266px;
+
+  @media (max-width: 760px) {
+    min-height: 82px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
 `;
 
 export const FeatureImage = styled.img`
@@ -378,6 +611,18 @@ export const FeatureImage = styled.img`
 export const DetailCard = styled.div`
   ${panel};
   padding: 18px 18px 18px;
+
+  @media (max-width: 760px) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 43%;
+    column-gap: 16px;
+    padding: 6px 8px 6px 14px;
+    border: 0;
+    border-left: 1px solid rgba(24, 79, 43, 0.07);
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
 `;
 
 export const FeatureNumber = styled.div`
@@ -391,6 +636,14 @@ export const FeatureNumber = styled.div`
   color: ${green};
   font-size: 1.08rem;
   font-weight: 800;
+
+  @media (max-width: 760px) {
+    width: 22px;
+    height: 22px;
+    grid-column: 1;
+    border-radius: 6px;
+    font-size: 0.58rem;
+  }
 `;
 
 export const DetailTitle = styled.h3`
@@ -398,6 +651,12 @@ export const DetailTitle = styled.h3`
   color: ${ink};
   font-size: 0.98rem;
   font-weight: 800;
+
+  @media (max-width: 760px) {
+    grid-column: 1;
+    margin-top: 5px;
+    font-size: 0.7rem;
+  }
 `;
 
 export const DetailText = styled.p`
@@ -405,12 +664,30 @@ export const DetailText = styled.p`
   color: #45534d;
   font-size: 0.84rem;
   line-height: 1.48;
+
+  @media (max-width: 760px) {
+    grid-column: 1;
+    margin-top: 6px;
+    color: #121d24;
+    font-size: 0.5rem;
+    line-height: 1.5;
+  }
 `;
 
 export const BulletList = styled.div`
   display: grid;
   gap: 6px;
   margin-top: 12px;
+
+  @media (max-width: 760px) {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    align-self: center;
+    gap: 8px;
+    margin-top: 0;
+    padding-left: 14px;
+    border-left: 1px solid rgba(24, 79, 43, 0.09);
+  }
 `;
 
 export const BulletItem = styled.div`
@@ -425,6 +702,18 @@ export const BulletItem = styled.div`
     height: 16px;
     color: #6cab72;
     flex: 0 0 auto;
+  }
+
+  @media (max-width: 760px) {
+    gap: 7px;
+    color: #101a20;
+    font-size: 0.5rem;
+    font-weight: 700;
+
+    svg {
+      width: 11px;
+      height: 11px;
+    }
   }
 `;
 
@@ -447,6 +736,26 @@ export const LearnMoreButton = styled.button`
     width: 15px;
     height: 15px;
   }
+
+  @media (max-width: 760px) {
+    grid-column: 1;
+    width: max-content;
+    min-width: 52px;
+    min-height: 13px;
+    margin-top: 6px;
+    padding: 0 7px;
+    border-radius: 3px;
+    border: 1px solid rgba(18, 108, 56, 0.34);
+    background: linear-gradient(180deg, #ffffff 0%, #f4faf5 100%);
+    color: ${green};
+    font-size: 0.44rem;
+    gap: 5px;
+
+    svg {
+      width: 8px;
+      height: 8px;
+    }
+  }
 `;
 
 export const StatGrid = styled.div`
@@ -455,7 +764,7 @@ export const StatGrid = styled.div`
   gap: 10px;
 
   @media (max-width: 760px) {
-    grid-template-columns: 1fr;
+    display: none;
   }
 `;
 
@@ -510,6 +819,10 @@ export const SideVisualCard = styled.div`
   position: relative;
   overflow: hidden;
   min-height: 266px;
+
+  @media (max-width: 760px) {
+    display: none;
+  }
 `;
 
 export const OverlayChecklist = styled.div`
@@ -561,6 +874,15 @@ export const CompareSection = styled.section`
   margin-top: 16px;
   padding: 0;
   overflow: hidden;
+
+  @media (max-width: 760px) {
+    margin-top: 9px;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    border: 0;
+    overflow: visible;
+  }
 `;
 
 export const CompareGrid = styled.div`
@@ -570,6 +892,11 @@ export const CompareGrid = styled.div`
 
   @media (max-width: 1100px) {
     grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1.04fr 0.96fr;
+    gap: 6px;
   }
 `;
 
@@ -583,6 +910,13 @@ export const CompareCard = styled.div`
     border-bottom: ${({ $withBorder }) =>
       $withBorder ? `1px solid ${borderColor}` : "0"};
   }
+
+  @media (max-width: 760px) {
+    ${panel};
+    border-radius: 10px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(27, 92, 51, 0.08);
+  }
 `;
 
 export const CompareTitle = styled.h3`
@@ -591,11 +925,20 @@ export const CompareTitle = styled.h3`
   color: ${ink};
   font-size: 1.12rem;
   font-weight: 800;
+
+  @media (max-width: 760px) {
+    padding: 8px 7px 6px;
+    font-size: 0.62rem;
+  }
 `;
 
 export const CompareTableWrap = styled.div`
   position: relative;
   padding: 0 22px 18px;
+
+  @media (max-width: 760px) {
+    padding: 0 7px 8px;
+  }
 `;
 
 export const CompareTable = styled.div`
@@ -604,6 +947,14 @@ export const CompareTable = styled.div`
   overflow: hidden;
   border-radius: 18px;
   border: 1px solid rgba(24, 79, 43, 0.08);
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 760px) {
+    border-radius: 6px;
+  }
 `;
 
 export const CompareColumn = styled.div`
@@ -628,12 +979,29 @@ export const CompareHeader = styled.div`
     width: 16px;
     height: 16px;
   }
+
+  @media (max-width: 760px) {
+    min-height: 24px;
+    padding: 0 7px;
+    gap: 5px;
+    font-size: 0.44rem;
+
+    svg {
+      width: 10px;
+      height: 10px;
+    }
+  }
 `;
 
 export const CompareList = styled.div`
   display: grid;
   gap: 10px;
   padding: 12px 16px 14px;
+
+  @media (max-width: 760px) {
+    gap: 0;
+    padding: 0;
+  }
 `;
 
 export const CompareItem = styled.div`
@@ -649,6 +1017,21 @@ export const CompareItem = styled.div`
     height: 15px;
     color: ${({ $success }) => ($success ? "#18713a" : "#e24f48")};
     flex: 0 0 auto;
+  }
+
+  @media (max-width: 760px) {
+    min-height: 30px;
+    gap: 6px;
+    padding: 6px 6px;
+    background: ${({ $success }) => ($success ? "#f5faf6" : "#ffffff")};
+    border-bottom: 1px solid rgba(24, 79, 43, 0.06);
+    font-size: 0.42rem;
+    line-height: 1.25;
+
+    svg {
+      width: 9px;
+      height: 9px;
+    }
   }
 `;
 
@@ -669,10 +1052,27 @@ export const VsBubble = styled.div`
   color: ${ink};
   font-size: 1rem;
   font-weight: 800;
+
+  @media (max-width: 640px) {
+    display: inline-flex;
+  }
+
+  @media (max-width: 760px) {
+    top: 86px;
+    width: 38px;
+    height: 38px;
+    font-size: 0.76rem;
+  }
 `;
 
 export const ReasonsPanel = styled.div`
   padding: 16px 22px 18px;
+
+  @media (max-width: 760px) {
+    ${panel};
+    padding: 8px 12px 10px;
+    border-radius: 10px;
+  }
 `;
 
 export const ReasonsTitle = styled.h3`
@@ -680,6 +1080,10 @@ export const ReasonsTitle = styled.h3`
   color: ${ink};
   font-size: 1.12rem;
   font-weight: 800;
+
+  @media (max-width: 760px) {
+    font-size: 0.66rem;
+  }
 `;
 
 export const ReasonsGrid = styled.div`
@@ -690,6 +1094,8 @@ export const ReasonsGrid = styled.div`
 
   @media (max-width: 760px) {
     grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 10px;
   }
 `;
 
@@ -698,6 +1104,11 @@ export const ReasonItem = styled.div`
   grid-template-columns: 52px minmax(0, 1fr);
   gap: 14px;
   align-items: start;
+
+  @media (max-width: 760px) {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 8px;
+  }
 `;
 
 export const ReasonIcon = styled.div`
@@ -714,6 +1125,16 @@ export const ReasonIcon = styled.div`
     width: 24px;
     height: 24px;
   }
+
+  @media (max-width: 760px) {
+    width: 34px;
+    height: 34px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
 `;
 
 export const ReasonTitle = styled.div`
@@ -727,6 +1148,13 @@ export const ReasonText = styled.p`
   color: ${muted};
   font-size: 0.9rem;
   line-height: 1.55;
+
+  @media (max-width: 760px) {
+    margin-top: 3px;
+    color: #16222b;
+    font-size: 0.48rem;
+    line-height: 1.28;
+  }
 `;
 
 export const CtaSection = styled.section`
@@ -742,6 +1170,10 @@ export const CtaSection = styled.section`
     ),
     linear-gradient(90deg, #0b6b34 0%, #095328 70%, #0b6b34 100%);
   box-shadow: 0 22px 42px rgba(11, 75, 36, 0.18);
+
+  @media (max-width: 760px) {
+    display: none;
+  }
 `;
 
 export const CtaGrid = styled.div`
@@ -848,6 +1280,11 @@ export const CtaButton = styled.button`
   svg {
     width: 16px;
     height: 16px;
+  }
+
+  @media (max-width: 760px) {
+    width: 100%;
+    min-width: 0;
   }
 `;
 

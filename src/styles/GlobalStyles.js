@@ -9,10 +9,13 @@ const GlobalStyles = createGlobalStyle`
 
   html {
     scroll-behavior: smooth;
+    width: 100%;
   }
 
   body {
     margin: 0;
+    width: 100%;
+    overflow-x: hidden;
     font-family: "Inter", sans-serif;
     background:
       radial-gradient(circle at left 18%, rgba(247, 210, 153, 0.52), transparent 22%),
@@ -25,6 +28,13 @@ const GlobalStyles = createGlobalStyle`
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
   }
 
   button,
@@ -40,6 +50,8 @@ const GlobalStyles = createGlobalStyle`
 
   #root {
     min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
   }
 `;
 

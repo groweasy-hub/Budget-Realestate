@@ -1,8 +1,10 @@
 import {
+  CardArrow,
   Card,
   CardAccent,
   CardBody,
   CardCopy,
+  CardDescription,
   CardDots,
   CardIconDisc,
   CardTitle,
@@ -68,6 +70,7 @@ function WhyChooseUs({
   heroImageAlt = "Why choose us illustration",
 }) {
   const resolvedPoints = points.length ? points : FALLBACK_POINTS;
+  const heroImageSrc = resolveAssetPath(heroImage);
 
   return (
     <Section id="why-choose-us">
@@ -83,9 +86,9 @@ function WhyChooseUs({
         </HeaderCopy>
 
         <HeroWrap>
-          <HeroStage $hasImage={Boolean(heroImage)}>
-            {heroImage ? (
-              <HeroImage src={heroImage} alt={heroImageAlt} />
+          <HeroStage $hasImage={Boolean(heroImageSrc)}>
+            {heroImageSrc ? (
+              <HeroImage src={heroImageSrc} alt={heroImageAlt} />
             ) : null}
           </HeroStage>
         </HeroWrap>
@@ -106,9 +109,12 @@ function WhyChooseUs({
               <CardCopy>
                 <CardTitle>{point.title}</CardTitle>
                 <CardAccent />
-                <p>{point.description}</p>
+                <CardDescription>{point.description}</CardDescription>
               </CardCopy>
             </CardBody>
+            <CardArrow aria-hidden="true">
+              <ChevronRightIcon />
+            </CardArrow>
           </Card>
         ))}
       </FeatureGrid>
@@ -140,6 +146,22 @@ function inferIcon(title = "") {
   }
 
   return "pricing";
+}
+
+function resolveAssetPath(path) {
+  if (!path) {
+    return "";
+  }
+
+  if (/^(https?:|data:|blob:)/.test(path)) {
+    return path;
+  }
+
+  if (path.startsWith("/")) {
+    return `${process.env.PUBLIC_URL || ""}${path}`;
+  }
+
+  return path;
 }
 
 function Icon({ type = "shield" }) {
@@ -358,6 +380,20 @@ function PricingIcon() {
         stroke="currentColor"
         strokeWidth="2.6"
         strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function ChevronRightIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M9 6L15 12L9 18"
+        stroke="currentColor"
+        strokeWidth="2.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

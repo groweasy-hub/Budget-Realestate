@@ -31,6 +31,7 @@ const PriceText = S.PriceText || "div";
 const CardStatus = S.CardStatus || "div";
 const CardMeta = S.CardMeta || "div";
 const CardMetaItem = S.CardMetaItem || "div";
+const CardMetaLabel = S.CardMetaLabel || "div";
 const CardMetaValue = S.CardMetaValue || "div";
 const LinkText = S.LinkText || Link;
 const LinkArrow = S.LinkArrow || "span";
@@ -118,30 +119,33 @@ function ProjectCard({ property, index }) {
             <LocationText $surface={surface}>{property.location}</LocationText>
           </LocationRow>
 
-          <CardMeta $surface={surface}>
-            <CardMetaItem $surface={surface}>
-              <PropertyTypeIcon />
-              <div>
-                <CardMetaValue $surface={surface}>
-                  {property.category}
-                </CardMetaValue>
-              </div>
-            </CardMetaItem>
-            <CardMetaItem $surface={surface}>
-              <BedIcon />
-              <div>
-                <CardMetaValue $surface={surface}>
-                  {property.details}
-                </CardMetaValue>
-              </div>
-            </CardMetaItem>
-            <CardMetaItem $surface={surface}>
-              <AreaIcon />
-              <div>
-                <CardMetaValue $surface={surface}>
-                  {property.area}
-                </CardMetaValue>
-              </div>
+            <CardMeta $surface={surface}>
+              <CardMetaItem $surface={surface}>
+                <PropertyTypeIcon />
+                <div>
+                  <CardMetaLabel $surface={surface}>Type</CardMetaLabel>
+                  <CardMetaValue $surface={surface}>
+                    {property.category}
+                  </CardMetaValue>
+                </div>
+              </CardMetaItem>
+              <CardMetaItem $surface={surface}>
+                <BedIcon />
+                <div>
+                  <CardMetaLabel $surface={surface}>Details</CardMetaLabel>
+                  <CardMetaValue $surface={surface}>
+                    {property.details}
+                  </CardMetaValue>
+                </div>
+              </CardMetaItem>
+              <CardMetaItem $surface={surface}>
+                <AreaIcon />
+                <div>
+                  <CardMetaLabel $surface={surface}>Area</CardMetaLabel>
+                  <CardMetaValue $surface={surface}>
+                    {property.area}
+                  </CardMetaValue>
+                </div>
             </CardMetaItem>
           </CardMeta>
 

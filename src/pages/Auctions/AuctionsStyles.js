@@ -26,16 +26,25 @@ export const AuctionsPageShell = styled.main`
       transparent 24%
     ),
     linear-gradient(180deg, #fcfdfb 0%, #f4f8f2 100%);
+
+  @media (max-width: 760px) {
+    background: linear-gradient(180deg, #fbfcfb 0%, #ffffff 48%, #f8fbf8 100%);
+  }
 `;
 
 export const AuctionsInner = styled.div`
   width: min(1520px, calc(100% - 68px));
   margin: 0 auto;
-  padding: 12px 0 40px;
+  padding: 52px 0 40px;
 
   @media (max-width: 1100px) {
     width: min(100%, calc(100% - 24px));
     padding-bottom: 28px;
+  }
+
+  @media (max-width: 640px) {
+    width: min(100%, calc(100% - 16px));
+    padding-top: 60px;
   }
 `;
 
@@ -61,6 +70,11 @@ export const HeroCopy = styled.div`
 
   @media (max-width: 1180px) {
     padding: 28px 4px 8px;
+  }
+
+  @media (max-width: 640px) {
+    margin-bottom: 24px;
+    padding: 16px 0 6px;
   }
 `;
 
@@ -182,6 +196,10 @@ export const SearchGrid = styled.div`
 
   @media (max-width: 1280px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 980px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   @media (max-width: 760px) {
@@ -335,6 +353,7 @@ export const SortTools = styled.div`
 
   @media (max-width: 980px) {
     margin-left: 0;
+    flex-wrap: wrap;
   }
 `;
 
@@ -394,7 +413,7 @@ export const ContentGrid = styled.div`
     grid-template-columns: 290px minmax(0, 1fr);
   }
 
-  @media (max-width: 980px) {
+  @media (max-width: 1100px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -801,6 +820,7 @@ export const ResultFooter = styled.div`
 export const BankInfo = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 16px;
   color: #394842;
   font-size: 0.92rem;
@@ -1083,4 +1103,880 @@ export const TrustText = styled.p`
   color: ${muted};
   font-size: 0.9rem;
   line-height: 1.55;
+`;
+
+export const DesktopAuctionsView = styled.div`
+  @media (max-width: 760px) {
+    display: none;
+  }
+`;
+
+export const MobileAuctionsView = styled.div`
+  display: none;
+
+  @media (max-width: 760px) {
+    display: grid;
+    gap: 10px;
+    padding: 0 0 16px;
+  }
+`;
+
+export const MobileAuctionHeroCard = styled.section`
+  position: relative;
+  overflow: hidden;
+  min-height: 144px;
+  margin: 0 -8px;
+  padding: 20px 18px 0 22px;
+  border-radius: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.98) 0%,
+      rgba(255, 255, 255, 0.92) 34%,
+      rgba(255, 255, 255, 0.46) 54%,
+      rgba(255, 255, 255, 0) 76%
+    ),
+    linear-gradient(180deg, #f7fbff 0%, #ffffff 100%);
+  border: 0;
+  box-shadow: none;
+`;
+
+export const MobileAuctionHeroTop = styled.div`
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(150px, 0.82fr) minmax(160px, 1.18fr);
+  gap: 0;
+  align-items: end;
+`;
+
+export const MobileAuctionHeroCopy = styled.div`
+  position: relative;
+  z-index: 2;
+  padding: 5px 0 24px;
+`;
+
+export const MobileAuctionHeroTitle = styled.h1`
+  margin: 0;
+  color: #121b20;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 2.24rem;
+  font-weight: 400;
+  line-height: 0.91;
+  letter-spacing: 0;
+
+  span {
+    display: block;
+    margin-top: 5px;
+    color: #0e7c34;
+  }
+`;
+
+export const MobileAuctionHeroDescription = styled.p`
+  margin: 12px 0 0;
+  color: #313a42;
+  font-size: 0.76rem;
+  line-height: 1.48;
+`;
+
+export const MobileAuctionHeroVisual = styled.div`
+  position: relative;
+  min-height: 182px;
+  margin-right: 0px;
+  margin-bottom: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 -42%;
+    width: 90%;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(255, 255, 255, 0.72) 42%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    z-index: 1;
+  }
+`;
+
+export const MobileAuctionHeroImage = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center 38%;
+  filter: saturate(0.96) contrast(1.02);
+`;
+
+export const MobileAuctionBellButton = styled.button`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(22, 106, 58, 0.12);
+  background: rgba(255, 255, 255, 0.94);
+  color: #16703a;
+  box-shadow: 0 12px 24px rgba(57, 74, 64, 0.1);
+
+  svg {
+    width: 17px;
+    height: 17px;
+    display: block;
+    margin: 0 auto;
+  }
+`;
+
+export const MobileAuctionHighlightsPanel = styled.section`
+  ${panel};
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin-top: -2px;
+  padding: 9px 0 7px;
+  border-radius: 12px;
+`;
+
+export const MobileAuctionHighlight = styled.div`
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 4px;
+  padding: 6px 4px 5px;
+  border-left: 1px solid rgba(31, 81, 47, 0.1);
+
+  &:first-child {
+    border-left: 0;
+  }
+`;
+
+export const MobileAuctionHighlightIcon = styled.div`
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #eff8ef 0%, #e4f2e5 100%);
+  color: #146d39;
+
+  svg {
+    height: 20px;
+    width: 20px;
+    display: block;
+  }
+`;
+
+export const MobileAuctionHighlightTitle = styled.div`
+  color: #166b36;
+  font-size: 0.52rem;
+  font-weight: 700;
+  line-height: 1.2;
+`;
+
+export const MobileAuctionHighlightText = styled.div`
+  color: #262e33;
+  font-size: 0.46rem;
+  line-height: 1.28;
+`;
+
+export const MobileAuctionSearchPanel = styled.section`
+  ${panel};
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 12px;
+`;
+
+export const MobileAuctionSearchBar = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: 9px;
+`;
+
+export const MobileAuctionSearchInputWrap = styled.div`
+  min-height: 31px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 12px;
+  border-radius: 7px;
+  border: 1px solid ${borderColor};
+  background: #ffffff;
+`;
+
+export const MobileAuctionSearchIcon = styled.span`
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #5d6a64;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+`;
+
+export const MobileAuctionSearchInput = styled.input`
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #1f2d27;
+  font-size: 0.68rem;
+
+  &::placeholder {
+    color: #697772;
+  }
+`;
+
+export const MobileAuctionFilterToggle = styled.button`
+  width: 32px;
+  height: 31px;
+  border-radius: 7px;
+  border: 1px solid ${borderColor};
+  background: #ffffff;
+  color: #4f5d57;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+    margin: 0 auto;
+  }
+`;
+
+export const MobileAuctionSearchGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+`;
+
+export const MobileAuctionSearchField = styled.div`
+  min-height: 34px;
+  padding: 6px 8px;
+  border-radius: 7px;
+  border: 1px solid ${borderColor};
+  background: #ffffff;
+  display: grid;
+  grid-template-columns: 15px minmax(0, 1fr) 10px;
+  align-items: center;
+  gap: 6px;
+`;
+
+export const MobileAuctionFieldIcon = styled.span`
+  width: 15px;
+  height: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #3e4a45;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+`;
+
+export const MobileAuctionFieldBody = styled.div`
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+`;
+
+export const MobileAuctionFieldLabel = styled.div`
+  color: #20282e;
+  font-size: 0.46rem;
+  font-weight: 700;
+  line-height: 1.15;
+`;
+
+export const MobileAuctionFieldValue = styled.div`
+  color: #121b20;
+  font-size: 0.62rem;
+  font-weight: 500;
+  line-height: 1.18;
+`;
+
+export const MobileAuctionFieldAction = styled.button`
+  width: 10px;
+  height: 10px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #4e5b55;
+
+  svg {
+    width: 10px;
+    height: 10px;
+    display: block;
+  }
+`;
+
+export const MobileAuctionDropdownPanel = styled.div`
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid ${borderColor};
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 18px 32px rgba(38, 52, 40, 0.08);
+`;
+
+export const MobileAuctionDropdownTitle = styled.div`
+  color: #5f6d67;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+`;
+
+export const MobileAuctionDropdownList = styled.div`
+  display: grid;
+  gap: 8px;
+`;
+
+export const MobileAuctionDropdownOption = styled.button`
+  min-height: 34px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid
+    ${({ $active }) =>
+      $active ? "rgba(17, 109, 49, 0.18)" : "rgba(31, 81, 47, 0.08)"};
+  background: ${({ $active }) =>
+    $active ? "linear-gradient(180deg, #eef8f0 0%, #e3f3e6 100%)" : "#ffffff"};
+  color: ${({ $active }) => ($active ? "#146d39" : "#23312b")};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-align: left;
+`;
+
+export const MobileAuctionPopularRow = styled.div`
+  display: grid;
+  gap: 8px;
+`;
+
+export const MobileAuctionPopularHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #1a2521;
+  font-size: 0.62rem;
+  font-weight: 700;
+`;
+
+export const MobileAuctionPopularMore = styled.button`
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #186f3c;
+  font-size: 0.62rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  svg {
+    width: 10px;
+    height: 10px;
+    display: block;
+  }
+`;
+
+export const MobileAuctionPopularChips = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+`;
+
+export const MobileAuctionPopularChip = styled.button`
+  min-height: 24px;
+  padding: 0 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(28, 111, 57, 0.16);
+  background: ${({ $active }) =>
+    $active
+      ? "linear-gradient(180deg, #eef8ef 0%, #e4f2e5 100%)"
+      : "linear-gradient(180deg, #fbfdfb 0%, #f4f8f4 100%)"};
+  color: #176d39;
+  font-size: 0.58rem;
+  font-weight: 700;
+  white-space: nowrap;
+`;
+
+export const MobileAuctionResultsSection = styled.section`
+  display: grid;
+  gap: 8px;
+`;
+
+export const MobileAuctionResultsHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 2px 0;
+`;
+
+export const MobileAuctionResultsCount = styled.h2`
+  margin: 0;
+  color: #141f1b;
+  font-size: 0.78rem;
+  font-weight: 800;
+`;
+
+export const MobileAuctionSortTools = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const MobileAuctionSortLabel = styled.div`
+  color: #525e59;
+  font-size: 0.62rem;
+
+  strong {
+    color: #1a2521;
+    font-weight: 700;
+  }
+`;
+
+export const MobileAuctionIconButtons = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;
+
+export const MobileAuctionIconButton = styled.button`
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid
+    ${({ $active }) => ($active ? "rgba(21, 112, 57, 0.24)" : borderColor)};
+  background: ${({ $active }) =>
+    $active ? "linear-gradient(180deg, #eef8ef 0%, #e1f1e3 100%)" : "#ffffff"};
+  color: ${({ $active }) => ($active ? "#156d39" : "#66746d")};
+
+  svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+    margin: 0 auto;
+  }
+`;
+
+export const MobileAuctionList = styled.div`
+  display: grid;
+  gap: 9px;
+`;
+
+export const MobileAuctionCard = styled.article`
+  ${panel};
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 34.5% minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+  border-radius: 9px;
+  cursor: pointer;
+`;
+
+export const MobileAuctionFigure = styled.div`
+  position: relative;
+  min-height: 112px;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #dce9df;
+`;
+
+export const MobileAuctionImage = styled.img`
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+`;
+
+export const MobileAuctionStatus = styled.div`
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  min-height: 18px;
+  padding: 0 7px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  color: #ffffff;
+  font-size: 0.48rem;
+  font-weight: 700;
+  background: ${({ $tone }) =>
+    $tone === "upcoming"
+      ? "linear-gradient(180deg, #f6a227 0%, #ec8a11 100%)"
+      : "linear-gradient(180deg, #119844 0%, #0d7a36 100%)"};
+`;
+
+export const MobileAuctionFavorite = styled.button`
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(203, 210, 214, 0.7);
+  background: rgba(255, 255, 255, 0.88);
+  color: #57655e;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+    margin: 0 auto;
+  }
+`;
+
+export const MobileAuctionCardBody = styled.div`
+  display: grid;
+  align-content: start;
+`;
+
+export const MobileAuctionTitle = styled.h3`
+  margin: 2px 0 0;
+  color: #1a2621;
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1.25;
+`;
+
+export const MobileAuctionLocation = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  color: #5e6d66;
+  font-size: 0.54rem;
+
+  svg {
+    width: 10px;
+    height: 10px;
+    display: block;
+  }
+`;
+
+export const MobileAuctionSpecs = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+`;
+
+export const MobileAuctionSpec = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #3f4d47;
+  font-size: 0.54rem;
+
+  svg {
+    width: 10px;
+    height: 10px;
+    display: block;
+  }
+`;
+
+export const MobileAuctionMetrics = styled.div`
+  display: grid;
+  grid-template-columns: 0.82fr 0.82fr 1.36fr;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 7px;
+  border-top: 1px solid rgba(32, 83, 49, 0.08);
+`;
+
+export const MobileAuctionMetric = styled.div`
+  min-width: 0;
+`;
+
+export const MobileAuctionMetricLabel = styled.div`
+  color: #67746e;
+  font-size: 0.46rem;
+  font-weight: 600;
+  line-height: 1.2;
+`;
+
+export const MobileAuctionMetricValue = styled.div`
+  margin-top: 4px;
+  color: ${({ $accent }) => ($accent ? successGreen : "#182620")};
+  font-size: ${({ $accent }) => ($accent ? "0.72rem" : "0.68rem")};
+  font-weight: 800;
+  line-height: 1.15;
+`;
+
+export const MobileAuctionMetricInline = styled.div`
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #182620;
+  font-size: 0.58rem;
+  font-weight: 700;
+`;
+
+export const MobileAuctionCountdown = styled.div`
+  display: flex;
+  gap: 5px;
+  margin-top: 4px;
+`;
+
+export const MobileAuctionCountdownBox = styled.div`
+  min-width: 24px;
+  padding: 5px 3px 4px;
+  border-radius: 5px;
+  border: 1px solid rgba(246, 92, 82, 0.22);
+  background: #fff7f6;
+  text-align: center;
+`;
+
+export const MobileAuctionCountdownValue = styled.div`
+  color: #ef4d42;
+  font-size: 0.58rem;
+  font-weight: 800;
+  line-height: 1;
+`;
+
+export const MobileAuctionCountdownLabel = styled.div`
+  margin-top: 3px;
+  color: #8c9094;
+  font-size: 0.32rem;
+  font-weight: 700;
+  line-height: 1;
+`;
+
+export const MobileAuctionFooter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 7px;
+  padding-top: 7px;
+  border-top: 1px solid rgba(32, 83, 49, 0.08);
+`;
+
+export const MobileAuctionBank = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: #36453f;
+  font-size: 0.54rem;
+`;
+
+export const MobileAuctionVerified = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #136d39;
+  font-size: 0.54rem;
+  font-weight: 700;
+
+  svg {
+    width: 10px;
+    height: 10px;
+    display: block;
+  }
+`;
+
+export const MobileAuctionDetailsButton = styled.button`
+  min-width: 62px;
+  min-height: 19px;
+  padding: 0 9px;
+  border-radius: 5px;
+  border: 1px solid rgba(31, 118, 61, 0.24);
+  background: linear-gradient(180deg, #ffffff 0%, #f5faf6 100%);
+  color: #166f39;
+  font-size: 0.52rem;
+  font-weight: 700;
+`;
+
+export const MobileAuctionAlertCard = styled.section`
+  ${panel};
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(150px, 1.05fr);
+  gap: 18px;
+  align-items: center;
+  padding: 18px 18px;
+  border-radius: 12px;
+`;
+
+export const MobileAuctionAlertCopy = styled.div`
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+`;
+
+export const MobileAuctionAlertIcon = styled.div`
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #eef8ef 0%, #e3f1e4 100%);
+  color: #166f39;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+`;
+
+export const MobileAuctionAlertTitle = styled.h3`
+  margin: 0;
+  color: #166c36;
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1.22;
+`;
+
+export const MobileAuctionAlertText = styled.p`
+  margin: 6px 0 0;
+  color: #394842;
+  font-size: 0.58rem;
+  line-height: 1.45;
+`;
+
+export const MobileAuctionAlertButton = styled.button`
+  min-height: 36px;
+  border-radius: 5px;
+  border: 0;
+  background: linear-gradient(180deg, #0f6b34 0%, #0a5a2a 100%);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  svg {
+    width: 13px;
+    height: 13px;
+    display: block;
+  }
+`;
+
+export const MobileAuctionStatsStrip = styled.section`
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+`;
+
+export const MobileAuctionStatCard = styled.div`
+  ${panel};
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 4px;
+  padding: 9px 4px 7px;
+  border-radius: 8px;
+`;
+
+export const MobileAuctionStatIcon = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #eef8ef 0%, #e2f1e4 100%);
+  color: #146e39;
+
+  svg {
+    width: 17px;
+    height: 17px;
+    display: block;
+  }
+`;
+
+export const MobileAuctionStatValue = styled.div`
+  color: #16251f;
+  font-size: 0.58rem;
+  font-weight: 800;
+  line-height: 1.15;
+`;
+
+export const MobileAuctionStatLabel = styled.div`
+  color: #44534d;
+  font-size: 0.46rem;
+  line-height: 1.22;
+`;
+
+export const MobileAuctionTrustPanel = styled.section`
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+`;
+
+export const MobileAuctionTrustGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+`;
+
+export const MobileAuctionTrustItem = styled.div`
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 4px;
+  padding: 5px 7px;
+  border-left: 1px solid rgba(31, 81, 47, 0.1);
+
+  &:first-child {
+    border-left: 0;
+  }
+`;
+
+export const MobileAuctionTrustIcon = styled.div`
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #166d39;
+
+  svg {
+    width: 17px;
+    height: 17px;
+    display: block;
+  }
+`;
+
+export const MobileAuctionTrustTitle = styled.div`
+  color: #17251f;
+  font-size: 0.5rem;
+  font-weight: 800;
+  line-height: 1.28;
+`;
+
+export const MobileAuctionTrustText = styled.div`
+  color: #58655f;
+  font-size: 0.44rem;
+  line-height: 1.32;
 `;

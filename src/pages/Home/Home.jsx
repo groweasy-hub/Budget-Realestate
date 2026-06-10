@@ -25,7 +25,11 @@ function Home() {
     <PageShell>
       <HeroStage>
         <HeroNavWrap>
-          <Navbar links={siteNavbar.links} ctaLabel={siteNavbar.ctaLabel} />
+          <Navbar
+            links={siteNavbar.links}
+            ctaLabel={siteNavbar.ctaLabel}
+            transparentDesktop
+          />
         </HeroNavWrap>
         <Hero activeTab="buy" />
       </HeroStage>

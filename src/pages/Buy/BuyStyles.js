@@ -9,11 +9,16 @@ export const BuyPageShell = styled.main`
 export const PageInner = styled.div`
   width: min(1520px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 0 0 56px;
+  padding: 50px 0 56px;
 
   @media (max-width: 980px) {
-    width: min(100%, calc(100% - 24px));
+    width: 100%;
     padding: 0 0 42px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 80px 0;
+    width: 100%;
   }
 `;
 
@@ -27,9 +32,72 @@ export const HeroSection = styled.section`
   box-shadow: none;
 
   @media (max-width: 980px) {
-    padding: 22px 16px 20px;
-    border-radius: 24px;
+    margin-top: 4px;
+    padding: 18px 24px 20px;
+    border-radius: 0;
   }
+
+  @media (max-width: 640px) {
+    padding: 16px 18px 16px;
+  }
+`;
+
+export const Breadcrumbs = styled.nav`
+  display: none;
+
+  @media (max-width: 980px) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    color: #4f5f64;
+    font-size: 0.94rem;
+    line-height: 1;
+  }
+`;
+
+export const BreadcrumbLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+`;
+
+export const BreadcrumbCurrent = styled.span`
+  color: #4f5f64;
+`;
+
+export const BreadcrumbChevron = styled.span`
+  width: 8px;
+  height: 8px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  opacity: 0.8;
+`;
+
+export const HeroKickerRow = styled.div`
+  display: none;
+
+  @media (max-width: 980px) {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+`;
+
+export const HeroKicker = styled.span`
+  color: #126a37;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+`;
+
+export const HeroKickerLine = styled.span`
+  width: 92px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(30, 110, 61, 0.3);
 `;
 
 export const HeroGrid = styled.div`
@@ -39,7 +107,7 @@ export const HeroGrid = styled.div`
   align-items: end;
   margin-top: 8px;
 
-  @media (max-width: 1080px) {
+  @media (max-width: 760px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -47,6 +115,15 @@ export const HeroGrid = styled.div`
 export const HeroCopy = styled.div`
   max-width: 560px;
   padding-bottom: 30px;
+
+  @media (max-width: 980px) {
+    max-width: 420px;
+    padding-bottom: 8px;
+  }
+
+  @media (max-width: 760px) {
+    padding-bottom: 12px;
+  }
 `;
 
 export const HeroTitle = styled.h1`
@@ -56,6 +133,15 @@ export const HeroTitle = styled.h1`
   font-weight: 700;
   line-height: 1.04;
   letter-spacing: -0.04em;
+
+  @media (max-width: 980px) {
+    color: #13211d;
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: clamp(2.9rem, 7.3vw, 4.15rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+  }
 `;
 
 export const HeroDescription = styled.p`
@@ -65,6 +151,13 @@ export const HeroDescription = styled.p`
   margin: 20px auto 0;
   font-size: clamp(1rem, 1.7vw, 1.18rem);
   line-height: 1.65;
+
+  @media (max-width: 980px) {
+    max-width: 380px;
+    margin: 16px 0 0;
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
 `;
 
 export const StatsRow = styled.div`
@@ -72,6 +165,10 @@ export const StatsRow = styled.div`
   flex-wrap: wrap;
   gap: 16px;
   margin-top: 30px;
+
+  @media (max-width: 980px) {
+    display: none;
+  }
 `;
 
 export const StatCard = styled.div`
@@ -116,12 +213,16 @@ export const HeroVisual = styled.div`
   position: relative;
   min-height: 360px;
 
-  @media (max-width: 1080px) {
-    min-height: 300px;
+  @media (max-width: 980px) {
+    min-height: 320px;
   }
 
   @media (max-width: 760px) {
-    min-height: 220px;
+    min-height: 300px;
+  }
+
+  @media (max-width: 640px) {
+    min-height: 240px;
   }
 `;
 
@@ -132,6 +233,23 @@ export const HeroImageWrap = styled.div`
   width: min(960px, 100%);
   overflow: hidden;
   border-radius: 26px;
+
+  @media (max-width: 980px) {
+    width: min(500px, 100%);
+    border-radius: 0;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      right: 22px;
+      z-index: 0;
+      width: 220px;
+      height: 220px;
+      border: 2px solid rgba(186, 213, 205, 0.36);
+      border-radius: 50%;
+    }
+  }
 `;
 
 export const HeroImage = styled.img`
@@ -148,8 +266,55 @@ export const HeroImage = styled.img`
     max-height: 450px;
   }
 
+  @media (max-width: 980px) {
+    position: relative;
+    z-index: 1;
+    max-height: 340px;
+    margin-bottom: 0;
+    padding-right: 0;
+  }
+
   @media (max-width: 760px) {
+    max-height: 260px;
+  }
+
+  @media (max-width: 640px) {
     max-height: 220px;
+  }
+`;
+
+export const MobileStatsStrip = styled.div`
+  display: none;
+
+  @media (max-width: 980px) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    margin-top: 14px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(27, 94, 60, 0.08);
+    box-shadow: 0 16px 36px rgba(42, 57, 46, 0.08);
+    overflow: hidden;
+  }
+`;
+
+export const MobileStatItem = styled.div`
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 18px 16px;
+  border-right: 1px solid rgba(28, 87, 49, 0.1);
+
+  &:last-child {
+    border-right: 0;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 42px 1fr;
+    gap: 10px;
+    padding: 16px 12px;
   }
 `;
 
@@ -166,6 +331,25 @@ export const FilterPanel = styled.div`
 
   @media (max-width: 980px) {
     margin: 12px 0 0;
+    padding: 18px 18px 14px;
+    border-radius: 22px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 16px 14px 14px;
+  }
+`;
+
+export const FilterHeading = styled.h3`
+  display: none;
+
+  @media (max-width: 980px) {
+    display: block;
+    margin: 0 0 12px;
+    color: #18231f;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
   }
 `;
 
@@ -179,26 +363,64 @@ export const FilterGrid = styled.div`
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  @media (max-width: 760px) {
-    grid-template-columns: 1fr;
+  @media (max-width: 980px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 16px;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 `;
 
 export const FilterField = styled.div`
   display: grid;
   gap: 8px;
+
+  @media (max-width: 980px) {
+    ${({ $full }) =>
+      $full &&
+      css`
+        grid-column: 1 / -1;
+      `}
+  }
+
+  @media (max-width: 640px) {
+    ${({ $full }) =>
+      $full &&
+      css`
+        grid-column: 1 / -1;
+      `}
+  }
 `;
 
 export const FilterLabel = styled.label`
   color: #31403b;
   font-size: 0.82rem;
   font-weight: 700;
+
+  @media (max-width: 980px) {
+    ${({ $visuallyHiddenOnMobile }) =>
+      $visuallyHiddenOnMobile &&
+      css`
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      `}
+  }
 `;
 
 const sharedField = css`
   width: 100%;
-  min-height: 52px;
-  padding: 0 16px;
+  min-height: 54px;
+  padding: 0 16px 0 46px;
   border-radius: 14px;
   border: 1px solid rgba(42, 91, 58, 0.12);
   background: #ffffff;
@@ -207,26 +429,66 @@ const sharedField = css`
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86);
 `;
 
+export const FilterControl = styled.div`
+  position: relative;
+`;
+
+export const FilterControlIcon = styled.span`
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  z-index: 1;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #7c8a89;
+  transform: translateY(-50%);
+
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+`;
+
+export const FilterChevron = styled.span`
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #687472;
+  pointer-events: none;
+  transform: translateY(-50%);
+
+  svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+`;
+
 export const FilterInput = styled.input`
   ${sharedField};
+  padding-right: 16px;
 `;
 
 export const FilterSelect = styled.select`
   ${sharedField};
   appearance: none;
-  background-image:
-    linear-gradient(45deg, transparent 50%, #28553a 50%),
-    linear-gradient(135deg, #28553a 50%, transparent 50%);
-  background-position:
-    calc(100% - 24px) calc(50% - 3px),
-    calc(100% - 18px) calc(50% - 3px);
-  background-size:
-    6px 6px,
-    6px 6px;
-  background-repeat: no-repeat;
+  padding-right: 42px;
 `;
 
 export const SearchButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   min-height: 52px;
   border-radius: 14px;
   border: 0;
@@ -235,6 +497,16 @@ export const SearchButton = styled.button`
   font-size: 0.96rem;
   font-weight: 700;
   box-shadow: 0 18px 32px rgba(19, 97, 51, 0.16);
+
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
+  @media (max-width: 980px) {
+    grid-column: 1 / -1;
+  }
 `;
 
 export const MoreFiltersButton = styled.button`
@@ -250,6 +522,12 @@ export const MoreFiltersButton = styled.button`
   color: #27553a;
   font-size: 0.9rem;
   font-weight: 700;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
 `;
 
 export const PageSection = styled.section`
@@ -257,6 +535,11 @@ export const PageSection = styled.section`
 
   @media (max-width: 980px) {
     margin-top: 28px;
+    padding: 0 24px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 0 18px;
   }
 `;
 
@@ -267,9 +550,8 @@ export const SectionHeaderRow = styled.div`
   gap: 16px;
   margin-bottom: 22px;
 
-  @media (max-width: 760px) {
-    flex-direction: column;
-    align-items: flex-start;
+  @media (max-width: 640px) {
+    gap: 12px;
   }
 `;
 
@@ -288,6 +570,48 @@ export const SectionAction = styled(Link)`
   text-decoration: none;
   font-size: 0.96rem;
   font-weight: 700;
+
+  @media (max-width: 640px) {
+    font-size: 0.9rem;
+  }
+`;
+
+export const FeaturedProjectsRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+
+  @media (max-width: 1180px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 980px) {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 18px;
+    padding: 0 12px 6px 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    > * {
+      flex: 0 0 min(320px, 72vw);
+      scroll-snap-align: start;
+    }
+  }
+
+  @media (max-width: 640px) {
+    > * {
+      flex-basis: min(296px, 82vw);
+    }
+  }
 `;
 
 export const WhyInvestPanel = styled.div`
@@ -300,6 +624,15 @@ export const WhyInvestPanel = styled.div`
   );
   border: 1px solid rgba(28, 86, 49, 0.08);
   box-shadow: 0 22px 50px rgba(46, 65, 50, 0.08);
+
+  @media (max-width: 980px) {
+    padding: 24px 0 10px;
+    border-radius: 24px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 22px 0 8px;
+  }
 `;
 
 export const CenterTitle = styled.h2`
@@ -331,8 +664,19 @@ export const ReasonGrid = styled.div`
     gap: 14px;
   }
 
-  @media (max-width: 760px) {
-    grid-template-columns: 1fr;
+  @media (max-width: 980px) {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(118px, 1fr);
+    grid-template-columns: none;
+    gap: 0;
+    overflow-x: auto;
+    margin-top: 26px;
+    padding: 0 4px 6px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 
@@ -351,6 +695,15 @@ export const ReasonCard = styled.div`
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.78);
     padding: 20px 16px;
+  }
+
+  @media (max-width: 980px) {
+    min-width: 118px;
+    border: 0;
+    border-right: 1px solid rgba(34, 87, 51, 0.12);
+    border-radius: 0;
+    background: transparent;
+    padding: 6px 16px 10px;
   }
 `;
 
@@ -395,8 +748,17 @@ export const BuilderGrid = styled.div`
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  @media (max-width: 760px) {
-    grid-template-columns: 1fr;
+  @media (max-width: 980px) {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(140px, 1fr);
+    grid-template-columns: none;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 
@@ -412,6 +774,13 @@ export const BuilderCard = styled.div`
   background: rgba(255, 255, 255, 0.98);
   border: 1px solid rgba(30, 84, 49, 0.1);
   box-shadow: 0 18px 34px rgba(53, 73, 56, 0.06);
+
+  @media (max-width: 980px) {
+    min-height: 92px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    box-shadow: none;
+  }
 `;
 
 export const BuilderName = styled.div`
@@ -420,6 +789,11 @@ export const BuilderName = styled.div`
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+
+  @media (max-width: 980px) {
+    font-size: 1.05rem;
+    line-height: 1.05;
+  }
 `;
 
 export const BuilderTag = styled.div`
@@ -427,9 +801,14 @@ export const BuilderTag = styled.div`
   color: #63716c;
   font-size: 0.82rem;
   line-height: 1.4;
+
+  @media (max-width: 980px) {
+    display: none;
+  }
 `;
 
 export const SupportBand = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -449,6 +828,22 @@ export const SupportBand = styled.div`
     flex-direction: column;
     align-items: flex-start;
     padding: 24px 18px;
+  }
+`;
+
+export const SupportIllustration = styled.div`
+  position: absolute;
+  right: 24px;
+  bottom: 12px;
+  width: 128px;
+  height: 128px;
+  color: rgba(155, 198, 119, 0.22);
+  pointer-events: none;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 `;
 
@@ -474,9 +869,22 @@ export const SupportActions = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
+
+  @media (max-width: 980px) {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 560px) {
+    width: 100%;
+  }
 `;
 
 export const SupportButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   min-height: 52px;
   padding: 0 22px;
   border-radius: 14px;
@@ -490,6 +898,17 @@ export const SupportButton = styled.button`
   color: #ffffff;
   font-size: 0.96rem;
   font-weight: 700;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
+  @media (max-width: 560px) {
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 export const TrustRow = styled.div`
@@ -505,8 +924,19 @@ export const TrustRow = styled.div`
     padding: 0;
   }
 
-  @media (max-width: 760px) {
-    grid-template-columns: 1fr;
+  @media (max-width: 980px) {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(120px, 1fr);
+    grid-template-columns: none;
+    gap: 0;
+    overflow-x: auto;
+    margin-top: 18px;
+    padding: 0;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 
@@ -528,6 +958,18 @@ export const TrustItem = styled.div`
     border: 1px solid rgba(34, 87, 51, 0.08);
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.9);
+  }
+
+  @media (max-width: 980px) {
+    min-height: auto;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    flex-direction: row;
+    align-items: center;
+    border-right: 1px solid rgba(34, 87, 51, 0.12);
   }
 `;
 
@@ -553,4 +995,27 @@ export const TrustLabel = styled.div`
   font-size: 0.92rem;
   font-weight: 600;
   line-height: 1.45;
+`;
+
+export const FavoriteButton = styled.button`
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.86);
+  color: #829199;
+  box-shadow: 0 8px 18px rgba(49, 64, 69, 0.14);
+
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
 `;

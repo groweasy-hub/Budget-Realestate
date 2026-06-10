@@ -28,6 +28,11 @@ export const PageInner = styled.div`
   width: min(1520px, calc(100% - 28px));
   margin: 0 auto;
   padding: 16px 0 30px;
+
+  @media (max-width: 760px) {
+    width: min(100%, calc(100% - 16px));
+    padding: 12px 0 24px;
+  }
 `;
 
 export const HeroGrid = styled.section`
@@ -35,6 +40,14 @@ export const HeroGrid = styled.section`
   grid-template-columns: minmax(0, 1.58fr) minmax(0, 1.08fr) 356px;
   gap: 14px;
   align-items: start;
+
+  @media (max-width: 1320px) {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  }
+
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const GalleryShell = styled.div`
@@ -42,6 +55,10 @@ export const GalleryShell = styled.div`
   grid-template-columns: minmax(0, 1fr) 174px;
   gap: 12px;
   min-width: 0;
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const MainMedia = styled.div`
@@ -49,6 +66,14 @@ export const MainMedia = styled.div`
   position: relative;
   overflow: hidden;
   min-height: 540px;
+
+  @media (max-width: 980px) {
+    min-height: 420px;
+  }
+
+  @media (max-width: 640px) {
+    min-height: 280px;
+  }
 `;
 
 export const MainImage = styled.img`
@@ -119,6 +144,14 @@ export const ViewPhotosButton = styled.button`
 export const ThumbnailColumn = styled.div`
   display: grid;
   gap: 10px;
+
+  @media (max-width: 760px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (max-width: 520px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 `;
 
 export const ThumbnailCard = styled.button`
@@ -157,6 +190,10 @@ export const ThumbnailLabel = styled.div`
 export const SummaryPanel = styled.div`
   min-width: 0;
   padding: 2px 10px 0 14px;
+
+  @media (max-width: 980px) {
+    padding: 0;
+  }
 `;
 
 export const BreadcrumbRow = styled.div`
@@ -184,12 +221,17 @@ export const TitleRow = styled.div`
   align-items: end;
   gap: 14px;
   margin-top: 18px;
+
+  @media (max-width: 640px) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 `;
 
 export const Title = styled.h1`
   margin: 0;
   color: #10211d;
-  font-size: clamp(2.35rem, 5vw, 2.25rem);
+  font-size: clamp(1.9rem, 4vw, 2.35rem);
   font-weight: 600;
   line-height: 0.98;
   letter-spacing: -0.05em;
@@ -287,6 +329,14 @@ export const SpecsGrid = styled.div`
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
   margin-top: 18px;
+
+  @media (max-width: 760px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const SpecCard = styled.div`
@@ -311,6 +361,14 @@ export const SpecCard = styled.div`
     height: 18px;
     color: ${({ $surface }) => ($surface === "dark" ? "#b7ebcb" : "#2e7b46")};
     flex: 0 0 auto;
+  }
+
+  @media (max-width: 520px) {
+    padding: 12px;
+    border-right: 0;
+    border-radius: 14px;
+    background: rgba(248, 251, 248, 0.9);
+    border: 1px solid rgba(35, 74, 58, 0.08);
   }
 `;
 
@@ -476,6 +534,14 @@ export const DetailsGrid = styled.section`
   gap: 14px;
   margin-top: 16px;
   align-items: start;
+
+  @media (max-width: 1320px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const InfoCard = styled.article`
@@ -532,6 +598,10 @@ export const AmenitiesGrid = styled.div`
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
   margin-top: 16px;
+
+  @media (max-width: 760px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 `;
 
 export const AmenityCard = styled.div`
@@ -630,6 +700,11 @@ export const CalculatorRow = styled.div`
   grid-template-columns: minmax(0, 1fr) 1.08fr;
   gap: 16px;
   align-items: center;
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 `;
 
 export const CalculatorFieldName = styled.div`
@@ -717,6 +792,10 @@ export const EstimateCard = styled.div`
   grid-template-columns: minmax(0, 1fr) 84px;
   gap: 12px;
   align-items: end;
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const EstimateLabel = styled.div`
@@ -774,6 +853,14 @@ export const SimilarGrid = styled.div`
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   margin-top: 14px;
+
+  @media (max-width: 760px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const SimilarItem = styled(Link)`
@@ -879,6 +966,11 @@ export const SecurityContent = styled.div`
   align-items: center;
   padding: 22px 20px;
   height: 100%;
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
 `;
 
 export const SecurityIconWrap = styled.div`
@@ -890,6 +982,13 @@ export const SecurityIconWrap = styled.div`
   svg {
     width: 110px;
     height: 110px;
+  }
+
+  @media (max-width: 520px) {
+    svg {
+      width: 84px;
+      height: 84px;
+    }
   }
 `;
 
@@ -933,6 +1032,11 @@ export const BottomBandGrid = styled.div`
   align-items: center;
   min-height: 110px;
   padding: 18px 20px;
+
+  @media (max-width: 1180px) {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
 `;
 
 export const BottomBandCopy = styled.div`
@@ -940,6 +1044,10 @@ export const BottomBandCopy = styled.div`
   grid-template-columns: 64px minmax(0, 1fr);
   gap: 16px;
   align-items: center;
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const BottomBandIcon = styled.div`
@@ -997,6 +1105,11 @@ export const BottomBandButton = styled.button`
     width: 18px;
     height: 18px;
   }
+
+  @media (max-width: 760px) {
+    width: 100%;
+    min-width: 0;
+  }
 `;
 
 export const BottomBandImage = styled.img`
@@ -1004,6 +1117,11 @@ export const BottomBandImage = styled.img`
   align-self: end;
   justify-self: end;
   display: block;
+
+  @media (max-width: 1180px) {
+    justify-self: start;
+    width: min(220px, 100%);
+  }
 `;
 
 export const ModalOverlay = styled.div`
@@ -1024,6 +1142,11 @@ export const ModalCard = styled.div`
   padding: 18px;
   border-radius: 28px;
   background: #ffffff;
+
+  @media (max-width: 640px) {
+    padding: 14px;
+    border-radius: 20px;
+  }
 `;
 
 export const ModalTop = styled.div`
@@ -1060,6 +1183,15 @@ export const ModalImage = styled.img`
   border-radius: 22px;
   object-fit: cover;
   display: block;
+
+  @media (max-width: 980px) {
+    height: 420px;
+  }
+
+  @media (max-width: 560px) {
+    height: 280px;
+    border-radius: 16px;
+  }
 `;
 
 export const ModalThumbRow = styled.div`
@@ -1067,4 +1199,8 @@ export const ModalThumbRow = styled.div`
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   margin-top: 12px;
+
+  @media (max-width: 560px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 `;

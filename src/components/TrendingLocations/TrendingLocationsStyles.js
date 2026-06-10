@@ -68,27 +68,25 @@ export const Header = styled.div`
   text-align: center;
 `;
 
-export const SectionKicker = styled.div`
+export const KickerRow = styled.div`
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  color: #2c8749;
+  gap: 16px;
+  margin-bottom: 18px;
+`;
+
+export const KickerLine = styled.span`
+  width: 46px;
+  height: 2px;
+  border-radius: 999px;
+  background: ${({ theme }) => theme.colors.secondary};
+`;
+
+export const Kicker = styled.span`
+  color: ${({ theme }) => theme.colors.secondary};
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.03em;
-
-  &::before,
-  &::after {
-    content: "";
-    width: 82px;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      rgba(58, 128, 73, 0),
-      rgba(58, 128, 73, 0.34),
-      rgba(58, 128, 73, 0)
-    );
-  }
 `;
 
 export const SectionTitle = styled.h2`

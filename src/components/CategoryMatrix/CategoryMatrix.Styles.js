@@ -112,6 +112,20 @@ export const Card = styled.article`
     0 6px 16px rgba(33, 48, 41, 0.05),
     0 16px 32px rgba(33, 48, 41, 0.07);
   min-height: 100%;
+
+  @media (max-width: 720px) {
+    ${({ $mobileAuction }) =>
+      $mobileAuction
+        ? `
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 12px;
+      padding: 8px;
+      border-radius: 18px;
+    `
+        : ""}
+  }
 `;
 
 export const Media = styled.div`
@@ -121,6 +135,19 @@ export const Media = styled.div`
   aspect-ratio: 1.5 / 1;
   background: #edf3eb;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+
+  @media (max-width: 720px) {
+    ${({ $mobileAuction }) =>
+      $mobileAuction
+        ? `
+      width: 48%;
+      flex: 0 0 48%;
+      aspect-ratio: auto;
+      min-height: 150px;
+      border-radius: 16px;
+    `
+        : ""}
+  }
 `;
 
 export const MediaImage = styled.img`
@@ -146,7 +173,7 @@ export const IconBadge = styled.div`
   top: 12px;
   left: 12px;
   z-index: 1;
-  display: inline-flex;
+  display: ${({ $mobileAuction }) => ($mobileAuction ? "none" : "inline-flex")};
   align-items: center;
   justify-content: center;
   width: 40px;
@@ -162,6 +189,25 @@ export const IconBadge = styled.div`
     height: 18px;
     display: block;
   }
+
+  @media (max-width: 720px) {
+    ${({ $mobileAuction }) =>
+      $mobileAuction
+        ? `
+      display: inline-flex;
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      border-width: 3px;
+      box-shadow: 0 10px 18px rgba(25, 86, 43, 0.18);
+
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    `
+        : ""}
+  }
 `;
 
 export const CardBody = styled.div`
@@ -169,6 +215,16 @@ export const CardBody = styled.div`
   flex: 1;
   flex-direction: column;
   padding: 12px 4px 0;
+
+  @media (max-width: 720px) {
+    ${({ $mobileAuction }) =>
+      $mobileAuction
+        ? `
+      justify-content: center;
+      padding: 10px 8px 10px 0;
+    `
+        : ""}
+  }
 `;
 
 export const CardTitle = styled.h3`
@@ -178,6 +234,17 @@ export const CardTitle = styled.h3`
   font-size: clamp(1.05rem, 1.1vw, 1.25rem);
   line-height: 1.12;
   letter-spacing: -0.04em;
+
+  @media (max-width: 720px) {
+    ${({ $mobileAuction }) =>
+      $mobileAuction
+        ? `
+      font-size: 1.05rem;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    `
+        : ""}
+  }
 `;
 
 export const CardDescription = styled.p`
@@ -185,6 +252,18 @@ export const CardDescription = styled.p`
   color: #4f6170;
   font-size: 0.88rem;
   line-height: 1.45;
+
+  @media (max-width: 720px) {
+    ${({ $mobileAuction }) =>
+      $mobileAuction
+        ? `
+      margin-top: 10px;
+      font-size: 0.82rem;
+      line-height: 1.35;
+      max-width: 230px;
+    `
+        : ""}
+  }
 `;
 
 export const CountPill = styled.div`
@@ -200,6 +279,22 @@ export const CountPill = styled.div`
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
     0 6px 18px rgba(31, 48, 41, 0.06);
+
+  @media (max-width: 720px) {
+    ${({ $mobileAuction }) =>
+      $mobileAuction
+        ? `
+      min-height: 0;
+      margin-top: 12px;
+      padding: 0;
+      gap: 8px;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
+      width: auto;
+    `
+        : ""}
+  }
 `;
 
 export const CountIconWrap = styled.span`
@@ -216,16 +311,46 @@ export const CountIconWrap = styled.span`
     width: 100%;
     height: 100%;
   }
+
+  @media (max-width: 720px) {
+    ${({ $mobileAuction }) =>
+      $mobileAuction
+        ? `
+      width: 22px;
+      height: 22px;
+    `
+        : ""}
+  }
 `;
 
 export const CountValue = styled.span`
   color: ${({ theme }) => theme.colors.primary};
   font-size: 0.86rem;
   font-weight: 700;
+
+  @media (max-width: 720px) {
+    ${({ $mobileAuction }) =>
+      $mobileAuction
+        ? `
+      font-size: 0.95rem;
+      font-weight: 800;
+    `
+        : ""}
+  }
 `;
 
 export const CountLabel = styled.span`
   color: #20312b;
   font-size: 0.86rem;
   font-weight: 500;
+
+  @media (max-width: 720px) {
+    ${({ $mobileAuction }) =>
+      $mobileAuction
+        ? `
+      font-size: 0.95rem;
+      font-weight: 500;
+    `
+        : ""}
+  }
 `;

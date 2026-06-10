@@ -13,6 +13,9 @@ export const OuterSection = styled(ContentSection)`
 export const SectionShell = styled.div`
   position: relative;
   display: grid;
+  grid-template-areas:
+    "copy hero"
+    "actions hero";
   grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
   gap: 28px;
   align-items: center;
@@ -25,33 +28,35 @@ export const SectionShell = styled.div`
   box-shadow: none;
 
   @media (max-width: 1180px) {
+    grid-template-areas:
+      "copy"
+      "hero"
+      "actions";
     grid-template-columns: 1fr;
     min-height: auto;
     gap: 22px;
     padding: 24px 22px 20px;
   }
+
+  @media (max-width: 760px) {
+    gap: 0;
+    padding: 28px 18px 18px;
+    border-radius: 0;
+    overflow: visible;
+    background: transparent;
+    box-shadow: none;
+  }
 `;
 
 export const Copy = styled.div`
+  grid-area: copy;
   position: relative;
   z-index: 1;
   max-width: 560px;
 
-  h2 {
-    margin: 18px 0 0;
-    color: #081714;
-    font-family: "DM Serif Display", Georgia, serif;
-    font-size: clamp(3rem, 5vw, 5.2rem);
-    line-height: 0.96;
-    letter-spacing: -0.05em;
-  }
-
-  p {
-    max-width: 520px;
-    margin: 20px 0 0;
-    color: #4a5a5e;
-    font-size: clamp(1rem, 1.6vw, 1.22rem);
-    line-height: 1.58;
+  @media (max-width: 760px) {
+    max-width: none;
+    padding: 10px 0 0;
   }
 `;
 
@@ -78,6 +83,23 @@ export const KickerPill = styled.div`
     height: 16px;
     display: block;
   }
+
+  @media (max-width: 760px) {
+    gap: 11px;
+    min-height: 54px;
+    padding: 0 26px;
+    border-radius: 999px;
+    background: rgba(251, 253, 249, 0.88);
+    border: 1.5px solid rgba(203, 223, 196, 0.98);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92);
+    font-size: 0.94rem;
+    letter-spacing: 0;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
 `;
 
 export const Title = styled.h2`
@@ -88,6 +110,15 @@ export const Title = styled.h2`
   font-weight: 400;
   line-height: 1.04;
   letter-spacing: -0.055em;
+
+  @media (max-width: 760px) {
+    max-width: 300px;
+    margin-top: 24px;
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: clamp(3.2rem, 13vw, 4.9rem);
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+  }
 `;
 
 export const Description = styled.p`
@@ -96,13 +127,31 @@ export const Description = styled.p`
   color: #536471;
   font-size: clamp(1rem, 1.7vw, 1.18rem);
   line-height: 1.65;
+
+  @media (max-width: 760px) {
+    max-width: 292px;
+    margin: 26px 0 0;
+    font-size: 0.98rem;
+    line-height: 1.66;
+  }
 `;
 
 export const ActionRow = styled.div`
+  grid-area: actions;
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   margin-top: 28px;
+
+  @media (max-width: 1180px) {
+    margin-top: 0;
+  }
+
+  @media (max-width: 760px) {
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 0 12px;
+  }
 `;
 
 const baseButton = css`
@@ -141,8 +190,28 @@ export const ButtonLink = styled(Link)`
       ? "0 14px 30px rgba(94, 118, 97, 0.08)"
       : "0 16px 32px rgba(15, 88, 46, 0.2)"};
 
+  span:first-child {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   @media (max-width: 760px) {
     width: 100%;
+    position: relative;
+    min-height: 52px;
+    padding: 0 24px;
+    border-radius: 22px;
+    font-size: 1.02rem;
+    background: ${({ $ghost }) => ($ghost ? "#ffffff" : "#0e6b34")};
+    border-width: ${({ $ghost }) => ($ghost ? "1.5px" : "0")};
+    box-shadow: ${({ $ghost }) =>
+      $ghost ? "inset 0 0 0 1px rgba(52, 144, 78, 0.18)" : "none"};
+
+    span:first-child {
+      width: 100%;
+      text-align: center;
+    }
   }
 `;
 
@@ -159,9 +228,24 @@ export const ButtonIcon = styled.span`
     height: 20px;
     display: block;
   }
+
+  @media (max-width: 760px) {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    width: 28px;
+    height: 28px;
+    transform: translateY(-50%);
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
 `;
 
 export const HeroPanel = styled.div`
+  grid-area: hero;
   position: relative;
   min-height: 440px;
   z-index: 1;
@@ -171,85 +255,32 @@ export const HeroPanel = styled.div`
   }
 
   @media (max-width: 760px) {
-    min-height: 300px;
+    min-height: auto;
+    margin-top: 4px;
+    padding: 0 0 4px;
   }
 `;
 
-export const Skyline = styled.div`
+export const BackdropSkyline = styled.div`
   position: absolute;
-  inset: 24px 8% auto 10%;
-  height: 250px;
-  opacity: 0.35;
-  background: linear-gradient(
-    90deg,
-    transparent 0 10%,
-    rgba(144, 180, 138, 0.2) 10% 12%,
-    transparent 12% 20%,
-    rgba(144, 180, 138, 0.18) 20% 22%,
-    transparent 22% 30%,
-    rgba(144, 180, 138, 0.24) 30% 33%,
-    transparent 33% 40%,
-    rgba(144, 180, 138, 0.18) 40% 42%,
-    transparent 42% 51%,
-    rgba(144, 180, 138, 0.22) 51% 54%,
-    transparent 54% 66%,
-    rgba(144, 180, 138, 0.16) 66% 68%,
-    transparent 68% 100%
-  );
-  mask-image:
-    linear-gradient(to top, #000 0 72%, transparent 100%),
-    linear-gradient(90deg, transparent 0 4%, #000 4% 96%, transparent 96% 100%);
+  display: none;
 
-  &::before {
-    content: "";
-    position: absolute;
-    left: 6%;
-    right: 0;
-    bottom: 0;
-    height: 100%;
-    background: linear-gradient(
-      180deg,
-      transparent 0 26%,
-      rgba(140, 177, 135, 0.18) 26% 100%
-    );
-    clip-path: polygon(
-      8% 100%,
-      8% 52%,
-      10% 52%,
-      10% 28%,
-      12% 28%,
-      12% 52%,
-      14% 52%,
-      14% 100%,
-      24% 100%,
-      24% 46%,
-      27% 46%,
-      27% 18%,
-      30% 46%,
-      30% 100%,
-      42% 100%,
-      42% 42%,
-      45% 42%,
-      45% 8%,
-      48% 42%,
-      48% 100%,
-      58% 100%,
-      58% 34%,
-      61% 34%,
-      61% 12%,
-      64% 34%,
-      64% 100%,
-      74% 100%,
-      74% 50%,
-      78% 50%,
-      78% 22%,
-      82% 50%,
-      82% 100%,
-      100% 100%,
-      100% 0,
-      0 0,
-      0 100%
-    );
+  @media (max-width: 760px) {
+    top: 4px;
+    right: -24px;
+    z-index: 1;
+    display: block;
+    width: 240px;
+    height: 300px;
+    color: rgba(162, 182, 154, 0.42);
+    opacity: 0.62;
+    filter: blur(0.3px);
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
   }
 `;
 
@@ -260,6 +291,17 @@ export const HeroArt = styled.div`
   width: min(720px, 100%);
   display: flex;
   justify-content: flex-end;
+
+  @media (max-width: 760px) {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    justify-content: center;
+    margin-top: -30px;
+    padding: 0px 30px 0;
+    z-index: 2;
+  }
 `;
 
 export const HeroImage = styled.img`
@@ -267,11 +309,48 @@ export const HeroImage = styled.img`
   height: auto;
   display: block;
   object-fit: contain;
+
+  @media (max-width: 760px) {
+    width: calc(100% + 62px);
+    max-width: none;
+    margin: 0 -18px;
+    filter: brightness(1.08) saturate(0.9) contrast(0.94);
+  }
+`;
+
+export const Birds = styled.div`
+  display: none;
+
+  @media (max-width: 760px) {
+    position: absolute;
+    top: 62px;
+    right: 62px;
+    z-index: 3;
+    display: block;
+    width: 76px;
+    color: rgba(135, 156, 131, 0.58);
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+`;
+
+export const FloatingCards = styled.div`
+  @media (max-width: 760px) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 14px;
+    margin-top: 6px;
+    padding: 0;
+  }
 `;
 
 export const FloatingCard = styled.div`
   position: absolute;
-  display: grid;
+  display: fex-wrap: wrap;
   grid-template-columns: 38px 1fr;
   gap: 10px;
   align-items: center;
@@ -332,8 +411,8 @@ export const FloatingCard = styled.div`
   }
 
   @media (max-width: 760px) {
-    min-width: 154px;
-    max-width: 176px;
+    min-width: 74px;
+    max-width: 126px;
     padding: 12px 14px;
     border-radius: 18px;
     grid-template-columns: 36px 1fr;
@@ -362,6 +441,46 @@ export const FloatingCard = styled.div`
       css`
         right: -2px;
       `}
+
+    position: relative;
+    inset: auto;
+    min-width: 0;
+    max-width: none;
+    padding: 18px 0px 18px 20px;
+    border-radius: 20px;
+    grid-template-columns: 66px minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(223, 233, 220, 0.96);
+    box-shadow: 0 12px 32px rgba(74, 95, 78, 0.08);
+    backdrop-filter: none;
+    transform: none;
+
+    p {
+      margin-top: 4px;
+      color: #5f6f73;
+      font-size: 0.84rem;
+      line-height: 1.3;
+    }
+
+    ${({ $position }) =>
+      $position === "top" &&
+      css`
+        order: 1;
+      `}
+
+    ${({ $position }) =>
+      $position === "right" &&
+      css`
+        order: 2;
+      `}
+
+    ${({ $position }) =>
+      $position === "bottom" &&
+      css`
+        order: 3;
+      `}
   }
 `;
 
@@ -372,7 +491,7 @@ export const FloatingCardIcon = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #f0f8ef 0%, #e5f3e4 100%);
+
   color: #247848;
 
   svg {
@@ -382,12 +501,12 @@ export const FloatingCardIcon = styled.div`
   }
 
   @media (max-width: 760px) {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
 
     svg {
-      width: 16px;
-      height: 16px;
+      width: 30px;
+      height: 30px;
     }
   }
 `;
@@ -399,7 +518,8 @@ export const FloatingCardEyebrow = styled.div`
   line-height: 1.2;
 
   @media (max-width: 760px) {
-    font-size: 0.66rem;
+    font-size: 0.63rem;
+    font-weight: 500;
   }
 `;
 
@@ -411,6 +531,7 @@ export const FloatingCardValue = styled.div`
   line-height: 1.1;
 
   @media (max-width: 760px) {
-    font-size: 0.82rem;
+    margin-top: 6px;
+    font-size: 0.88rem;
   }
 `;

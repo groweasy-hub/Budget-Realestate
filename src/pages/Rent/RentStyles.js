@@ -8,11 +8,17 @@ export const RentPageShell = styled.main`
 export const PageInner = styled.div`
   width: min(1520px, calc(100% - 0px));
   margin: 0 auto;
-  padding: 0 0 54px;
+  padding: 50px 0 54px;
 
   @media (max-width: 980px) {
+    padding: 50px 0 0;
     width: min(100%, calc(100% - 20px));
     padding: 0 0 36px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 50px 0 0;
+    width: min(100%, calc(100% - 16px));
   }
 `;
 
@@ -32,6 +38,10 @@ export const HeroSection = styled.section`
 
   @media (max-width: 760px) {
     padding: 22px 16px 186px;
+  }
+
+  @media (max-width: 560px) {
+    padding: 18px 12px 206px;
   }
 `;
 
@@ -158,6 +168,13 @@ export const SearchShell = styled.div`
 
   @media (max-width: 760px) {
     bottom: -178px;
+  }
+
+  @media (max-width: 560px) {
+    left: 0;
+    right: 0;
+    margin: 0;
+    bottom: -196px;
   }
 `;
 
@@ -430,10 +447,16 @@ export const ContentSection = styled.section`
 
   @media (max-width: 1180px) {
     margin-top: 170px;
+    padding: 0 16px 0;
   }
 
   @media (max-width: 760px) {
     margin-top: 222px;
+    padding: 0;
+  }
+
+  @media (max-width: 560px) {
+    margin-top: 238px;
   }
 `;
 
@@ -447,7 +470,7 @@ export const ContentGrid = styled.div`
     grid-template-columns: 250px minmax(0, 1fr);
   }
 
-  @media (max-width: 980px) {
+  @media (max-width: 1100px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -718,6 +741,7 @@ export const ListingsArea = styled.div``;
 export const ListingsHeader = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
   margin: 2px 0 14px;
   color: #2f3b35;
@@ -857,6 +881,11 @@ export const ListingFooter = styled.div`
   justify-content: space-between;
   gap: 14px;
   margin-top: 12px;
+
+  @media (max-width: 520px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const ListingPrice = styled.div`
@@ -1028,4 +1057,764 @@ export const TrustText = styled.p`
   color: #5f6b68;
   font-size: 0.9rem;
   line-height: 1.55;
+`;
+
+export const DesktopRentView = styled.div`
+  @media (max-width: 760px) {
+    display: none;
+  }
+`;
+
+export const MobileRentView = styled.div`
+  display: none;
+
+  @media (max-width: 760px) {
+    display: grid;
+    gap: 18px;
+    padding: 30px 0 20px;
+  }
+`;
+
+export const MobileHeroCard = styled.section`
+  position: relative;
+  overflow: hidden;
+  padding: 24px 18px 18px;
+  border-radius: 34px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcf9 100%);
+  border: 1px solid rgba(46, 78, 58, 0.12);
+  box-shadow:
+    0 24px 50px rgba(47, 63, 53, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+`;
+
+export const MobileHeroVisual = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 74%;
+  pointer-events: none;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.98) 0%,
+      rgba(255, 255, 255, 0.86) 22%,
+      rgba(255, 255, 255, 0.08) 62%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    z-index: 1;
+  }
+`;
+
+export const MobileHeroImage = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.9) brightness(1.06);
+`;
+
+export const MobileHeroCopy = styled.div`
+  position: relative;
+  z-index: 2;
+  max-width: 46%;
+  min-height: 178px;
+  padding-top: 18px;
+`;
+
+export const MobileHeroTitle = styled.h1`
+  margin: 0;
+  color: #0f4c2a;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(2.2rem, 7vw, 3.4rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+`;
+
+export const MobileHeroDescription = styled.p`
+  margin: 18px 0 0;
+  color: #2f373f;
+  font-size: 0.78rem;
+  line-height: 1.55;
+`;
+
+export const MobileAccountButton = styled.button`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(27, 109, 60, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  color: #16713b;
+  box-shadow: 0 12px 24px rgba(58, 77, 65, 0.1);
+
+  svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: 0 auto;
+  }
+`;
+
+export const MobileStatsPanel = styled.section`
+  ${whitePanel};
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  padding: 8px 0;
+`;
+
+export const MobileStatEntry = styled.div`
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 4px;
+  padding: 16px 10px 14px;
+  border-left: 1px solid rgba(31, 89, 53, 0.12);
+
+  &:first-child {
+    border-left: 0;
+  }
+`;
+
+export const MobileStatIcon = styled.div`
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #126d38;
+
+  svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+  }
+`;
+
+export const MobileStatValue = styled.div`
+  margin-top: 2px;
+  color: #101820;
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1.1;
+`;
+
+export const MobileStatText = styled.div`
+  color: #49535c;
+  font-size: 0.76rem;
+  line-height: 1.25;
+`;
+
+export const MobileSearchPanel = styled.section`
+  ${whitePanel};
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+`;
+
+export const MobileSearchBar = styled.div`
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) 24px;
+  align-items: center;
+  gap: 12px;
+  min-height: 60px;
+  padding: 0 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(31, 89, 53, 0.12);
+  background: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.94);
+`;
+
+export const MobileSearchBarIcon = styled.span`
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #6a747d;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+`;
+
+export const MobileSearchBarInput = styled.input`
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #20272f;
+  font-size: 0.98rem;
+  line-height: 1.2;
+
+  &::placeholder {
+    color: #67727a;
+  }
+`;
+
+export const MobileFilterToggle = styled.button`
+  width: 24px;
+  height: 24px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #556168;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+`;
+
+export const MobileFilterGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+`;
+
+export const MobileFilterField = styled.button`
+  min-height: 74px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(31, 89, 53, 0.12);
+  background: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.94);
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) 12px;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  color: #162029;
+`;
+
+export const MobileFilterFieldIcon = styled.span`
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #4f5960;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+`;
+
+export const MobileFilterFieldBody = styled.span`
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+`;
+
+export const MobileFilterFieldLabel = styled.span`
+  color: #313a42;
+  font-size: 0.76rem;
+  line-height: 1.1;
+`;
+
+export const MobileFilterFieldValue = styled.span`
+  color: #111921;
+  font-size: 0.94rem;
+  font-weight: 500;
+  line-height: 1.15;
+`;
+
+export const MobileFilterFieldChevron = styled.span`
+  width: 12px;
+  height: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #616c73;
+
+  svg {
+    width: 10px;
+    height: 10px;
+    display: block;
+  }
+`;
+
+export const MobileFilterDropdown = styled.div`
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(31, 89, 53, 0.12);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 18px 34px rgba(51, 69, 55, 0.08);
+`;
+
+export const MobileFilterDropdownTitle = styled.div`
+  color: #59646b;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+`;
+
+export const MobileFilterDropdownSection = styled.div`
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+
+  & + & {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(31, 89, 53, 0.08);
+  }
+`;
+
+export const MobileFilterDropdownOption = styled.button`
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid
+    ${({ $active }) =>
+      $active ? "rgba(17, 109, 49, 0.18)" : "rgba(31, 89, 53, 0.08)"};
+  background: ${({ $active }) =>
+    $active ? "linear-gradient(180deg, #eef8f0 0%, #e3f3e6 100%)" : "#ffffff"};
+  color: ${({ $active }) => ($active ? "#146d39" : "#23312b")};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-align: left;
+  font-size: 0.84rem;
+  font-weight: 600;
+`;
+
+export const MobileSearchCta = styled.button`
+  min-height: 56px;
+  border-radius: 14px;
+  border: 0;
+  background: linear-gradient(180deg, #0f6b35 0%, #0c5d2d 100%);
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 700;
+  box-shadow: 0 18px 30px rgba(20, 96, 49, 0.16);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+`;
+
+export const MobileMoreFiltersButton = styled.button`
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #116b37;
+  font-size: 0.98rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+`;
+
+export const MobileSection = styled.section`
+  display: grid;
+  gap: 12px;
+`;
+
+export const MobileSectionHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 2px;
+`;
+
+export const MobileSectionTitle = styled.h2`
+  margin: 0;
+  color: #15211c;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 1.85rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.04em;
+`;
+
+export const MobileSectionLink = styled.button`
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #126d38;
+  font-size: 0.96rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+`;
+
+export const MobilePillRow = styled.div`
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 2px 2px 4px;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const MobilePill = styled.button`
+  min-width: max-content;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(24, 110, 59, 0.16);
+  background: linear-gradient(180deg, #fbfdfb 0%, #f3f8f3 100%);
+  color: #176e3c;
+  font-size: 0.94rem;
+  font-weight: 500;
+`;
+
+export const MobileFeaturedRail = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(268px, 72vw);
+  gap: 14px;
+  overflow-x: auto;
+  padding: 2px 2px 6px;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const MobileFeaturedCard = styled.article`
+  ${whitePanel};
+  overflow: hidden;
+`;
+
+export const MobileFeaturedFigure = styled.div`
+  position: relative;
+  height: 166px;
+  overflow: hidden;
+`;
+
+export const MobileFeaturedImage = styled.img`
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+`;
+
+export const MobileFeaturedBadge = styled.div`
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: ${({ $featured }) =>
+    $featured
+      ? "linear-gradient(180deg, #7d33ea 0%, #5d21bf 100%)"
+      : "linear-gradient(180deg, #15703a 0%, #0f5d2f 100%)"};
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+`;
+
+export const MobileFeaturedFavorite = styled.button`
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+    margin: 0 auto;
+  }
+`;
+
+export const MobileFeaturedBody = styled.div`
+  display: grid;
+  gap: 8px;
+  padding: 14px 14px 16px;
+`;
+
+export const MobileFeaturedCardTitle = styled.h3`
+  margin: 0;
+  color: #1b232b;
+  font-size: 1.02rem;
+  line-height: 1.28;
+`;
+
+export const MobileFeaturedLocation = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #566169;
+  font-size: 0.84rem;
+  line-height: 1.35;
+
+  svg {
+    width: 13px;
+    height: 13px;
+    display: block;
+    flex: 0 0 auto;
+  }
+`;
+
+export const MobileFeaturedSpecs = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #49545c;
+  font-size: 0.82rem;
+
+  span + span::before {
+    content: "•";
+    margin-right: 8px;
+    color: #8e989f;
+  }
+`;
+
+export const MobileFeaturedPrice = styled.div`
+  color: #0e7037;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.2;
+`;
+
+export const MobileFeaturedDeposit = styled.div`
+  color: #434d55;
+  font-size: 0.84rem;
+  line-height: 1.3;
+`;
+
+export const MobileFeaturedButton = styled.button`
+  width: 100%;
+  min-height: 40px;
+  margin-top: 2px;
+  border-radius: 10px;
+  border: 1px solid rgba(20, 108, 58, 0.18);
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbf8 100%);
+  color: #176f3c;
+  font-size: 0.9rem;
+  font-weight: 700;
+`;
+
+export const MobileSupportGrid = styled.section`
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 14px;
+`;
+
+export const MobileSupportCard = styled.div`
+  ${whitePanel};
+  padding: 18px 16px;
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 12px;
+`;
+
+export const MobileSupportIconWrap = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #eef7ef 0%, #e3f1e4 100%);
+  color: #1d7440;
+
+  svg {
+    width: 25px;
+    height: 25px;
+    display: block;
+  }
+`;
+
+export const MobileSupportTitle = styled.h3`
+  margin: 0;
+  color: #163321;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+`;
+
+export const MobileSupportText = styled.p`
+  margin: 0;
+  color: #465159;
+  font-size: 0.62rem;
+  line-height: 1.55;
+`;
+
+export const MobileSupportButton = styled.button`
+  min-width: 168px;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 10px;
+  border: 0;
+  background: linear-gradient(180deg, #0f6b35 0%, #0c5d2d 100%);
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 700;
+`;
+
+export const MobileQuickActions = styled.div`
+  display: grid;
+  gap: 12px;
+`;
+
+export const MobileQuickActionCard = styled.button`
+  ${whitePanel};
+  width: 100%;
+  padding: 14px;
+  display: flex;
+  grid-template-columns: 52px minmax(0, 1fr) 14px;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+`;
+
+export const MobileQuickActionIcon = styled.span`
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #1d7440;
+
+  svg {
+    width: 30px;
+    height: 30px;
+    display: block;
+  }
+`;
+
+export const MobileQuickActionTitle = styled.div`
+  color: #1a2229;
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.2;
+`;
+
+export const MobileQuickActionText = styled.div`
+  margin-top: 4px;
+  color: #4e5960;
+  font-size: 0.5rem;
+  line-height: 1.5;
+`;
+
+export const MobileQuickActionArrow = styled.span`
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #232c32;
+
+  svg {
+    width: 12px;
+    height: 12px;
+    display: block;
+  }
+`;
+
+export const MobileTrustPanel = styled.section`
+  ${whitePanel};
+  padding: 14px 6px;
+`;
+
+export const MobileTrustGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+`;
+
+export const MobileTrustItem = styled.div`
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 12px 8px 10px;
+  border-left: 1px solid rgba(31, 89, 53, 0.1);
+
+  &:first-child {
+    border-left: 0;
+  }
+`;
+
+export const MobileTrustIcon = styled.div`
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #176f3c;
+
+  svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+  }
+`;
+
+export const MobileTrustLabel = styled.div`
+  color: #163321;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.2;
+`;
+
+export const MobileTrustCopy = styled.div`
+  color: #4f5a62;
+  font-size: 0.58rem;
+  line-height: 1.3;
 `;

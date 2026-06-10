@@ -19,12 +19,19 @@ import {
   InputColumn,
   Inner,
   Kicker,
+  KickerIconBox,
   KickerLine,
   KickerRow,
+  MobileHeaderIllustration,
   NoteRow,
+  RangeFill,
   RangeInput,
+  RangeSlider,
+  RangeThumb,
+  RangeTrack,
   ResultMeta,
   ResultMetaCard,
+  ResultMetaDescription,
   ResultMetaIcon,
   ResultMetaLabel,
   ResultMetaValue,
@@ -32,11 +39,13 @@ import {
   Section,
   SelectBox,
   SummaryValue,
+  TextValueBox,
   Title,
-  ValueInput,
 } from "./BudgetCalculatorStyles";
 
 const TENURE_OPTIONS = [10, 15, 20, 25, 30];
+const INTEREST_OPTIONS = [6.5, 7, 7.5, 8, 8.4, 8.5, 9, 9.5, 10];
+const CURRENCY_SYMBOL = "\u20B9";
 
 function BudgetCalculator({
   title = "Budget Calculator",
@@ -96,7 +105,7 @@ function BudgetCalculator({
         ? loanAmount / Math.max(months, 1)
         : (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, months)) /
           (Math.pow(1 + monthlyRate, months) - 1);
-    const totalCost = downPayment + emi * months;
+    const totalCost = emi * months;
     const score = getAffordabilityScore({
       propertyPrice,
       downPayment,
@@ -110,9 +119,22 @@ function BudgetCalculator({
       totalCost,
       score,
       loanAmount,
-      gaugeProgress: clamp((emi / 90000) * 100, 18, 92),
+      gaugeProgress: clamp((emi / 62000) * 100, 18, 92),
     };
   }, [downPayment, interestRate, propertyPrice, tenureYears]);
+
+  const interestOptions = useMemo(() => {
+    return Array.from(new Set([...INTEREST_OPTIONS, interestRate])).sort(
+      (left, right) => left - right,
+    );
+  }, [interestRate]);
+  const houseImageSrc = resolveAssetPath(summary.houseImage);
+  const calculatorImageSrc = resolveAssetPath(summary.calculatorImage);
+
+  const propertyProgress = getVisualProgress(propertyPrice, 1500000, 9000000);
+  const downPaymentProgress = getVisualProgress(downPayment, 300000, 1800000);
+  const interestProgress = getVisualProgress(interestRate, 6, 9);
+  const tenureProgress = getVisualProgress(tenureYears, 8, 22);
 
   return (
     <Section id="budget-calculator">
@@ -120,12 +142,23 @@ function BudgetCalculator({
       <Inner>
         <Header>
           <KickerRow>
+            <KickerIconBox>
+              <CalculatorIcon />
+            </KickerIconBox>
             <KickerLine />
             <Kicker>Budget Calculator</Kicker>
             <KickerLine />
           </KickerRow>
           <Title>{title}</Title>
           <SummaryValue>{description}</SummaryValue>
+          <MobileHeaderIllustration>
+            {houseImageSrc ? (
+              <IllustrationImage
+                src={houseImageSrc}
+                alt={summary.houseImageAlt || "Budget calculator house"}
+              />
+            ) : null}
+          </MobileHeaderIllustration>
         </Header>
 
         <CalculatorShell>
@@ -136,18 +169,23 @@ function BudgetCalculator({
                   <HomeIcon />
                 </FieldIconWrap>
                 <FieldLabel>Property Price</FieldLabel>
-                <ValueInput
-                  type="number"
+                <TextValueBox aria-label="Property Price">
+                  {displayCurrency(propertyPrice)}
+                </TextValueBox>
+              </FieldHeader>
+              <RangeSlider>
+                <RangeTrack aria-hidden="true">
+                  <RangeFill style={{ width: `${propertyProgress}%` }} />
+                  <RangeThumb style={{ left: `${propertyProgress}%` }} />
+                </RangeTrack>
+                <RangeInput
+                  type="range"
                   min={1500000}
                   max={50000000}
                   step={50000}
                   value={propertyPrice}
                   onChange={(event) => {
-                    const nextPrice = clamp(
-                      Number(event.target.value) || 1500000,
-                      1500000,
-                      50000000,
-                    );
+                    const nextPrice = Number(event.target.value);
                     setPropertyPrice(nextPrice);
                     setDownPayment((current) =>
                       clamp(
@@ -157,27 +195,8 @@ function BudgetCalculator({
                       ),
                     );
                   }}
-                  aria-label="Property Price"
                 />
-              </FieldHeader>
-              <RangeInput
-                type="range"
-                min={1500000}
-                max={50000000}
-                step={50000}
-                value={propertyPrice}
-                onChange={(event) => {
-                  const nextPrice = Number(event.target.value);
-                  setPropertyPrice(nextPrice);
-                  setDownPayment((current) =>
-                    clamp(
-                      current,
-                      300000,
-                      Math.max(nextPrice - 100000, 300000),
-                    ),
-                  );
-                }}
-              />
+              </RangeSlider>
             </FieldCard>
 
             <FieldCard>
@@ -186,32 +205,28 @@ function BudgetCalculator({
                   <WalletIcon />
                 </FieldIconWrap>
                 <FieldLabel>Down Payment</FieldLabel>
-                <ValueInput
-                  type="number"
+                <TextValueBox aria-label="Down Payment">
+                  {displayCurrency(
+                    Math.min(downPayment, propertyPrice - 100000),
+                  )}
+                </TextValueBox>
+              </FieldHeader>
+              <RangeSlider>
+                <RangeTrack aria-hidden="true">
+                  <RangeFill style={{ width: `${downPaymentProgress}%` }} />
+                  <RangeThumb style={{ left: `${downPaymentProgress}%` }} />
+                </RangeTrack>
+                <RangeInput
+                  type="range"
                   min={300000}
                   max={Math.max(propertyPrice - 100000, 300000)}
                   step={25000}
                   value={Math.min(downPayment, propertyPrice - 100000)}
                   onChange={(event) =>
-                    setDownPayment(
-                      clamp(
-                        Number(event.target.value) || 300000,
-                        300000,
-                        Math.max(propertyPrice - 100000, 300000),
-                      ),
-                    )
+                    setDownPayment(Number(event.target.value))
                   }
-                  aria-label="Down Payment"
                 />
-              </FieldHeader>
-              <RangeInput
-                type="range"
-                min={300000}
-                max={Math.max(propertyPrice - 100000, 300000)}
-                step={25000}
-                value={Math.min(downPayment, propertyPrice - 100000)}
-                onChange={(event) => setDownPayment(Number(event.target.value))}
-              />
+              </RangeSlider>
             </FieldCard>
 
             <FieldCard>
@@ -220,11 +235,7 @@ function BudgetCalculator({
                   <PercentIcon />
                 </FieldIconWrap>
                 <FieldLabel>Interest Rate</FieldLabel>
-                <ValueInput
-                  type="number"
-                  min={0.1}
-                  max={30}
-                  step={0.1}
+                <SelectBox
                   value={interestRate}
                   onChange={(event) =>
                     setInterestRate(
@@ -232,18 +243,30 @@ function BudgetCalculator({
                     )
                   }
                   aria-label="Interest Rate"
-                />
+                >
+                  {interestOptions.map((rate) => (
+                    <option key={rate} value={rate}>
+                      {formatPercentValue(rate)}
+                    </option>
+                  ))}
+                </SelectBox>
               </FieldHeader>
-              <RangeInput
-                type="range"
-                min={0.1}
-                max={30}
-                step={0.1}
-                value={interestRate}
-                onChange={(event) =>
-                  setInterestRate(Number(event.target.value))
-                }
-              />
+              <RangeSlider>
+                <RangeTrack aria-hidden="true">
+                  <RangeFill style={{ width: `${interestProgress}%` }} />
+                  <RangeThumb style={{ left: `${interestProgress}%` }} />
+                </RangeTrack>
+                <RangeInput
+                  type="range"
+                  min={0.1}
+                  max={30}
+                  step={0.1}
+                  value={interestRate}
+                  onChange={(event) =>
+                    setInterestRate(Number(event.target.value))
+                  }
+                />
+              </RangeSlider>
             </FieldCard>
 
             <FieldCard>
@@ -265,14 +288,22 @@ function BudgetCalculator({
                   ))}
                 </SelectBox>
               </FieldHeader>
-              <RangeInput
-                type="range"
-                min={5}
-                max={30}
-                step={1}
-                value={tenureYears}
-                onChange={(event) => setTenureYears(Number(event.target.value))}
-              />
+              <RangeSlider>
+                <RangeTrack aria-hidden="true">
+                  <RangeFill style={{ width: `${tenureProgress}%` }} />
+                  <RangeThumb style={{ left: `${tenureProgress}%` }} />
+                </RangeTrack>
+                <RangeInput
+                  type="range"
+                  min={5}
+                  max={30}
+                  step={1}
+                  value={tenureYears}
+                  onChange={(event) =>
+                    setTenureYears(Number(event.target.value))
+                  }
+                />
+              </RangeSlider>
             </FieldCard>
 
             <NoteRow>
@@ -286,9 +317,9 @@ function BudgetCalculator({
 
           <ResultPanel>
             <HouseIllustration>
-              {summary.houseImage ? (
+              {houseImageSrc ? (
                 <IllustrationImage
-                  src={summary.houseImage}
+                  src={houseImageSrc}
                   alt={summary.houseImageAlt || "Budget calculator house"}
                 />
               ) : null}
@@ -300,13 +331,13 @@ function BudgetCalculator({
               </GaugeArt>
               <GaugeText>
                 <span>Estimated EMI</span>
-                <strong>{formatCurrency(Math.round(result.emi))}</strong>
+                <strong>{displayCurrency(Math.round(result.emi))}</strong>
                 <small>/ month</small>
               </GaugeText>
               <GaugeImageWrap>
-                {summary.calculatorImage ? (
+                {calculatorImageSrc ? (
                   <GaugeImage
-                    src={summary.calculatorImage}
+                    src={calculatorImageSrc}
                     alt={
                       summary.calculatorImageAlt || "Budget calculator visual"
                     }
@@ -323,9 +354,11 @@ function BudgetCalculator({
                 <div>
                   <ResultMetaLabel>Total Cost</ResultMetaLabel>
                   <ResultMetaValue>
-                    {formatCompactCurrency(result.totalCost)}
+                    {displayCompactCurrency(result.totalCost)}
                   </ResultMetaValue>
-                  <p>Includes principal, interest & charges</p>
+                  <ResultMetaDescription $compact>
+                    Includes principal, interest & charges
+                  </ResultMetaDescription>
                 </div>
               </ResultMetaCard>
 
@@ -336,7 +369,9 @@ function BudgetCalculator({
                 <div>
                   <ResultMetaLabel>Affordability Score</ResultMetaLabel>
                   <ResultMetaValue>{result.score.label}</ResultMetaValue>
-                  <p>{result.score.description}</p>
+                  <ResultMetaDescription $score>
+                    {result.score.description}
+                  </ResultMetaDescription>
                 </div>
               </ResultMetaCard>
             </ResultMeta>
@@ -356,6 +391,26 @@ function BudgetCalculator({
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
+}
+
+function getVisualProgress(value, min, max) {
+  return clamp(((value - min) / Math.max(max - min, 1)) * 100, 0, 100);
+}
+
+function resolveAssetPath(path) {
+  if (!path) {
+    return "";
+  }
+
+  if (/^(https?:|data:|blob:)/.test(path)) {
+    return path;
+  }
+
+  if (path.startsWith("/")) {
+    return `${process.env.PUBLIC_URL || ""}${path}`;
+  }
+
+  return path;
 }
 
 function parseCurrency(value = "") {
@@ -409,6 +464,18 @@ function formatCompactCurrency(value) {
   }
 
   return formatCurrency(value);
+}
+
+function displayCurrency(value) {
+  return formatCurrency(value).replace("â‚¹", CURRENCY_SYMBOL);
+}
+
+function displayCompactCurrency(value) {
+  return formatCompactCurrency(value).replace("â‚¹", CURRENCY_SYMBOL);
+}
+
+function formatPercentValue(value) {
+  return `${Number(value).toFixed(1).replace(/\.0$/, "")}%`;
 }
 
 function getAffordabilityScore({
@@ -505,6 +572,36 @@ function HomeIcon() {
         stroke="currentColor"
         strokeWidth="1.9"
         strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CalculatorIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect
+        x="5"
+        y="3.8"
+        width="14"
+        height="16.4"
+        rx="2.4"
+        stroke="currentColor"
+        strokeWidth="1.9"
+      />
+      <rect
+        x="8.2"
+        y="7"
+        width="7.6"
+        height="2.8"
+        rx="0.8"
+        fill="currentColor"
+      />
+      <path
+        d="M8.2 12.6H9.7M12 12.6H13.5M15.8 12.6H15.9M8.2 15.8H9.7M12 15.8H13.5M15.8 15.8H15.9"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
       />
     </svg>
   );

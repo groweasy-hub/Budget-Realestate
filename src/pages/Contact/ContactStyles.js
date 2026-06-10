@@ -36,6 +36,10 @@ export const ContactInner = styled.div`
   @media (max-width: 1180px) {
     width: min(100%, calc(100% - 24px));
   }
+
+  @media (max-width: 640px) {
+    width: min(100%, calc(100% - 16px));
+  }
 `;
 
 export const HeroSection = styled.section`
@@ -56,6 +60,10 @@ export const HeroGrid = styled.div`
 
 export const HeroCopy = styled.div`
   padding: 12px 0 0 10px;
+
+  @media (max-width: 760px) {
+    padding: 10px 0 0;
+  }
 `;
 
 export const HeroBadge = styled.div`
@@ -155,6 +163,10 @@ export const HeroVisual = styled.div`
   @media (max-width: 1180px) {
     min-height: 360px;
   }
+
+  @media (max-width: 640px) {
+    min-height: 240px;
+  }
 `;
 
 export const HeroGlow = styled.div`
@@ -187,6 +199,11 @@ export const FloatingCards = styled.div`
   z-index: 2;
   display: grid;
   gap: 16px;
+
+  @media (max-width: 760px) {
+    position: static;
+    margin-top: 16px;
+  }
 `;
 
 export const FloatingCard = styled.div`
@@ -344,6 +361,10 @@ export const FormSection = styled.section`
 
 export const FormPanel = styled.div`
   padding: 22px 24px 22px;
+
+  @media (max-width: 760px) {
+    padding: 18px 16px;
+  }
 `;
 
 export const SectionTitle = styled.h2`
@@ -558,6 +579,10 @@ export const FormSidebar = styled.div`
     rgba(244, 248, 243, 0.95) 52%,
     rgba(249, 252, 249, 0.98) 100%
   );
+
+  @media (max-width: 760px) {
+    padding: 22px 16px 18px;
+  }
 `;
 
 export const Signature = styled.div`
@@ -894,6 +919,10 @@ export const StatsSection = styled.section`
   @media (max-width: 1180px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const StatItem = styled.div`
@@ -987,6 +1016,14 @@ export const BottomCtaGrid = styled.div`
   align-items: center;
   min-height: 112px;
   padding: 20px 24px 22px;
+
+  @media (max-width: 1180px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 760px) {
+    padding: 18px 16px;
+  }
 `;
 
 export const BottomCtaPrimary = styled.div`
@@ -1042,6 +1079,11 @@ export const LightButton = styled.button`
   gap: 10px;
   white-space: nowrap;
   cursor: pointer;
+
+  @media (max-width: 760px) {
+    width: 100%;
+    min-width: 0;
+  }
 `;
 
 export const DarkOutlineButton = styled.button`
@@ -1060,4 +1102,9 @@ export const DarkOutlineButton = styled.button`
   gap: 10px;
   white-space: nowrap;
   cursor: pointer;
+
+  @media (max-width: 760px) {
+    width: 100%;
+    min-width: 0;
+  }
 `;

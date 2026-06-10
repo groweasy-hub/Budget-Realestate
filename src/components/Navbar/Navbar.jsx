@@ -1,62 +1,95 @@
+import { useEffect, useRef, useState } from "react";
 import {
   Actions,
   Brand,
   BrandCopy,
   BrandMark,
+  ButtonLabelDesktop,
+  ButtonLabelMobile,
+  MenuButton,
   NavChevron,
   NavLinkItem,
   NavLinks,
+  NavWrapper,
   PrimaryButton,
   ProfileButton,
   Shell,
 } from "./NavbarStyles";
+
+function useScrollDirection() {
+  const [visible, setVisible] = useState(true);
+  const lastY = useRef(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setVisible(y < lastY.current || y < 60);
+      lastY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return visible;
+}
 
 function Navbar({
   links = [],
   ctaLabel = "List Your Property",
   homeTo = "/",
   showProfile = true,
+  transparentDesktop = false,
 }) {
+  const visible = useScrollDirection();
+
   return (
-    <Shell>
-      <Brand to={homeTo}>
-        <BrandMark>
-          <BrandLogoIcon />
-        </BrandMark>
-        <BrandCopy>
-          <strong>Budget</strong>
-          <span>Realestate</span>
-        </BrandCopy>
-      </Brand>
+    <NavWrapper $visible={visible} $transparentDesktop={transparentDesktop}>
+      <Shell $transparentDesktop={transparentDesktop}>
+        <MenuButton type="button" aria-label="Open menu">
+          <MenuIcon />
+        </MenuButton>
 
-      <NavLinks>
-        {links.map((link) => (
-          <NavLinkItem
-            key={link.label}
-            to={link.to}
-            $active={Boolean(link.active)}
-          >
-            <span>{link.label}</span>
-            {needsChevron(link.label) ? (
-              <NavChevron>
-                <ChevronDownIcon />
-              </NavChevron>
-            ) : null}
-          </NavLinkItem>
-        ))}
-      </NavLinks>
+        <Brand to={homeTo}>
+          <BrandMark>
+            <BrandLogoIcon />
+          </BrandMark>
+          <BrandCopy>
+            <strong>Budget</strong>
+            <span>Realestate</span>
+          </BrandCopy>
+        </Brand>
 
-      <Actions>
-        <PrimaryButton type="button">
-          {ctaLabel} <PlusIcon />
-        </PrimaryButton>
-        {showProfile ? (
-          <ProfileButton type="button">
-            <ProfileIcon />
-          </ProfileButton>
-        ) : null}
-      </Actions>
-    </Shell>
+        <NavLinks>
+          {links.map((link) => (
+            <NavLinkItem
+              key={link.label}
+              to={link.to}
+              $active={Boolean(link.active)}
+            >
+              <span>{link.label}</span>
+              {needsChevron(link.label) ? (
+                <NavChevron>
+                  <ChevronDownIcon />
+                </NavChevron>
+              ) : null}
+            </NavLinkItem>
+          ))}
+        </NavLinks>
+
+        <Actions>
+          <PrimaryButton type="button">
+            <ButtonLabelDesktop>{ctaLabel}</ButtonLabelDesktop>
+            <ButtonLabelMobile>List Property</ButtonLabelMobile>
+            <PlusIcon />
+          </PrimaryButton>
+          {showProfile ? (
+            <ProfileButton type="button">
+              <ProfileIcon />
+            </ProfileButton>
+          ) : null}
+        </Actions>
+      </Shell>
+    </NavWrapper>
   );
 }
 
@@ -93,6 +126,31 @@ function ChevronDownIcon() {
         strokeWidth="1.6"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function MenuIcon() {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M5.5 8.5H26.5"
+        stroke="currentColor"
+        strokeWidth="2.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M5.5 16H26.5"
+        stroke="currentColor"
+        strokeWidth="2.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M5.5 23.5H26.5"
+        stroke="currentColor"
+        strokeWidth="2.8"
+        strokeLinecap="round"
       />
     </svg>
   );

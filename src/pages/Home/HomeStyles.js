@@ -18,6 +18,12 @@ export const NavWrap = styled.div`
     width: min(100%, calc(100% - 20px));
     padding-top: 16px;
   }
+
+  @media (max-width: 760px) {
+    width: 100%;
+    margin: 0;
+    padding-top: 0;
+  }
 `;
 
 export const HeroNavWrap = styled(NavWrap)`
@@ -30,6 +36,12 @@ export const HeroNavWrap = styled(NavWrap)`
 
   @media (max-width: 980px) {
     padding-top: 16px;
+  }
+
+  @media (max-width: 760px) {
+    left: 0;
+    transform: none;
+    padding-top: 0;
   }
 `;
 

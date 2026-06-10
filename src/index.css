@@ -16,8 +16,14 @@
   box-sizing: border-box;
 }
 
+html {
+  width: 100%;
+}
+
 body {
   margin: 0;
+  width: 100%;
+  overflow-x: hidden;
   font-family: "Inter", sans-serif;
   background:
     radial-gradient(circle at left 18%, rgba(247, 210, 153, 0.52), transparent 22%),
@@ -32,12 +38,21 @@ a {
   text-decoration: none;
 }
 
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
 button {
   font: inherit;
 }
 
 #root {
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 code {
