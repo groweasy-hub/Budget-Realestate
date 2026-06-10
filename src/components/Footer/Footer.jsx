@@ -380,7 +380,7 @@ function Footer() {
 
           <MobileBottomRow>
             <Copyright>
-              {"\u00A9"} 2025 Budget RealEstate. All rights reserved.
+              {"\u00A9"} 2026 Budget RealEstate. All rights reserved.
             </Copyright>
 
             <MobileLegalLinks>

@@ -63,7 +63,6 @@ import {
   MobileAuctionAlertText,
   MobileAuctionAlertTitle,
   MobileAuctionBank,
-  MobileAuctionBellButton,
   MobileAuctionCard,
   MobileAuctionCardBody,
   MobileAuctionCountdown,

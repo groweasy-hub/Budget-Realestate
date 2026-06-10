@@ -3,16 +3,16 @@ import styled from "styled-components";
 
 export const Shell = styled.footer`
   position: relative;
-  overflow: hidden;
-  margin: 0 0 0;
-
-  background: linear-gradient(180deg, #f7f8f5 0%, #f5f7f4 100%);
+  overflow-x: clip;
+  overflow-y: visible;
+  margin: 0;
+  background: transparent;
 `;
 
 export const Wrap = styled.div`
   position: relative;
   width: 100%;
-  margin: 0;
+
   padding: 24px 34px 24px;
   border-radius: 34px 34px 0 0;
   background:
@@ -27,14 +27,12 @@ export const Wrap = styled.div`
       transparent 24%
     ),
     linear-gradient(90deg, #0b6b34 0%, #084e26 72%, #0b6b34 100%);
-  box-shadow: 0 22px 42px rgba(11, 75, 36, 0.18);
 
   &::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: 34px 34px 0 0;
-    border: 1px solid rgba(159, 186, 117, 0.12);
     pointer-events: none;
   }
 
@@ -63,7 +61,7 @@ export const Wrap = styled.div`
   @media (max-width: 760px) {
     min-height: auto;
 
-    padding: 4px 6px 6px;
+    padding: 2px 4px 0;
     border-radius: 30px 30px 0 0;
     background:
       radial-gradient(
@@ -77,7 +75,6 @@ export const Wrap = styled.div`
         transparent 22%
       ),
       linear-gradient(90deg, #06281b 0%, #041c13 55%, #083722 100%);
-    box-shadow: 0 18px 32px rgba(5, 29, 16, 0.28);
   }
 `;
 
@@ -91,7 +88,7 @@ export const DesktopFooterContent = styled.div`
 
 export const MobileFooterContent = styled.div`
   display: none;
-
+  border-radius: 30px 30px 0 0;
   @media (max-width: 760px) {
     display: block;
   }
@@ -782,7 +779,6 @@ export const MobileContactGrid = styled.div`
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
   padding: 0 2px 8px;
-  border-bottom: 1px solid rgba(222, 235, 220, 0.14);
 
   @media (max-width: 560px) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -916,8 +912,6 @@ export const MobileSupportButton = styled(SupportButton)`
 export const MobileTrustStrip = styled.div`
   margin: 8px 0 8px;
   padding: 6px 2px 6px;
-  border-top: 1px solid rgba(222, 235, 220, 0.14);
-  border-bottom: 1px solid rgba(222, 235, 220, 0.14);
 `;
 
 export const MobileTrustGrid = styled.div`
@@ -995,12 +989,12 @@ export const MobileLegalLinks = styled.div`
 `;
 
 export const Copyright = styled.p`
-  margin: 0;
   color: rgba(247, 250, 246, 0.92);
   font-size: 0.92rem;
 
   @media (max-width: 760px) {
-    font-size: 0.92rem;
+    margin: 10px 0 10px;
+    font-size: 0.62rem;
   }
 `;
 
