@@ -167,9 +167,6 @@ import {
   MobilePriceRow,
   MobilePriceLabel,
   MobilePriceValue,
-  MobilePriceDivider,
-  MobilePriceMeta,
-  MobilePriceMetaValue,
   MobileBottomBar,
   MobileBottomBarBtn,
   DesktopOnly,
@@ -1212,40 +1209,6 @@ function BackArrowIcon() {
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function CalendarIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect
-        x="3.5"
-        y="5"
-        width="13"
-        height="11"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-      <path
-        d="M7 3.5V6.5"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-      <path
-        d="M13 3.5V6.5"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-      <path
-        d="M3.5 9H16.5"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
       />
     </svg>
   );
